@@ -4,7 +4,7 @@ import engine.card.Card
 
 class RuleInput(private val stack: List<Card>, private val card: Card) {
 
-    private val runningTotal: Int = stack.sumOf { c -> c.getRank().cardValue }
+    private val runningTotal: Int = stack.sumOf { c -> c.getRank().cardValue } + card.getCardValue()
 
     fun getStack(): List<Card> { return stack }
 
