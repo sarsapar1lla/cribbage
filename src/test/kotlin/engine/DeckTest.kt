@@ -10,22 +10,22 @@ class DeckTest {
 
     @Test
     fun dealsTwoHandsOfSixCards() {
-        val (cutterHand, dealerHand) = deck.deal()
-        assertEquals(6, cutterHand.getCards().size)
-        assertEquals(6, dealerHand.getCards().size)
+        val (cutterCards, dealerCards) = deck.deal()
+        assertEquals(6, cutterCards.size)
+        assertEquals(6, dealerCards.size)
     }
 
     @Test
     fun dealtCardsMatch() {
-        val (cutterHand, dealerHand) = deck.deal()
-        val cards = cutterHand.getCards() + dealerHand.getCards()
+        val (cutterCards, dealerCards) = deck.deal()
+        val cards = cutterCards + dealerCards
         assertEquals(cards, deck.getDealtCards().toSet())
     }
 
     @Test
     fun remainingCardsAreCorrect() {
-        val (cutterHand, dealerHand) = deck.deal()
-        val cards = cutterHand.getCards() + dealerHand.getCards()
+        val (cutterCards, dealerCards) = deck.deal()
+        val cards = cutterCards + dealerCards
         assertEquals(40, deck.getRemainingCards().size)
         assertTrue(cards.none { c -> deck.getRemainingCards().contains(c) })
     }

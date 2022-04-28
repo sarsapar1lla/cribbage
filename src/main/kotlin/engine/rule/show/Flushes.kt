@@ -13,9 +13,13 @@ class Flushes : Rule {
             return 0
         }
         val starterHasSameSuit = uniqueSuits.contains(ruleInput.getStarterCard().getSuit())
-        if (starterHasSameSuit && ruleInput.getHasCrib()) {
+        if (starterHasSameSuit) {
             return fiveCardFlushPoints  // five-card flush
+        }
+        if (ruleInput.isCrib()) {
+            return 0  // crib can only score a five-card flush
         }
         return fourCardFlushPoints  // four-card flush
     }
+
 }

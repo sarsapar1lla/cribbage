@@ -28,28 +28,28 @@ class Deck(shuffled: Boolean = true) {
         return cards
     }
 
-    private fun dealOne(): Card {
+    fun dealOne(): Card {
         val card = getRemainingCards().first()
         dealtCards.add(card)
         return card
     }
 
     fun getRemainingCards(): List<Card> {
-        return cards.filter { c -> c !in dealtCards }
+        return cards.filterNot { c -> c in dealtCards }
     }
 
     fun getDealtCards(): List<Card> {
         return dealtCards
     }
 
-    fun deal(): Pair<Hand, Hand> {
+    fun deal(): Pair<Set<Card>, Set<Card>> {
         val firstSet = mutableSetOf<Card>()
         val secondSet = mutableSetOf<Card>()
         for (i in 1..6) {
             firstSet.add(dealOne())
             secondSet.add(dealOne())
         }
-        return Pair(Hand(firstSet), Hand(secondSet))
+        return Pair(firstSet, secondSet)
     }
 
 }

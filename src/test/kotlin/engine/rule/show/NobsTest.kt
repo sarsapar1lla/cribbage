@@ -11,7 +11,7 @@ import kotlin.test.assertEquals
 
 class NobsTest {
 
-    private val cards = setOf(
+    private val cards = mutableSetOf(
         Card(Suit.SPADES, Rank.EIGHT),
         Card(Suit.CLUBS, Rank.EIGHT),
         Card(Suit.DIAMONDS, Rank.EIGHT),

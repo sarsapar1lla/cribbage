@@ -11,7 +11,7 @@ import kotlin.test.assertEquals
 
 class RunsTest {
 
-    private val cards = setOf(
+    private val cards = mutableSetOf(
         Card(Suit.CLUBS, Rank.SEVEN),
         Card(Suit.CLUBS, Rank.EIGHT),
         Card(Suit.CLUBS, Rank.NINE),
