@@ -12,7 +12,7 @@ class Pairs : Rule {
     }
 
     override fun apply(ruleInput: RuleInput): Int {
-        val pairs = ruleInput.getStack().takeLastWhile { it.getRank() == ruleInput.getCard().getRank() }
+        val pairs = ruleInput.getStack().getCards().takeLastWhile { it.getRank() == ruleInput.getCard().getRank() }
         if (pairs.isEmpty()) {
             return 0
         }

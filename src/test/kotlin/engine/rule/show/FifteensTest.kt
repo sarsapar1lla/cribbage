@@ -12,7 +12,7 @@ import kotlin.test.assertEquals
 
 internal class FifteensTest {
 
-    private val cards = setOf(
+    private val cards = mutableSetOf(
         Card(Suit.HEARTS, Rank.EIGHT),
         Card(Suit.DIAMONDS, Rank.SEVEN),
         Card(Suit.DIAMONDS, Rank.ACE),

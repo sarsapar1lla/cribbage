@@ -3,7 +3,7 @@ package engine.rule.show
 import engine.Hand
 import engine.card.Card
 
-class RuleInput(private val hand: Hand, private val starterCard: Card, private val hasCrib: Boolean = false) {
+class RuleInput(private val hand: Hand, private val starterCard: Card, private val isCrib: Boolean = false) {
 
     private val uniqueCombinations: Set<Set<Card>> = hand.findUniqueCombinations(starterCard)
 
@@ -11,7 +11,7 @@ class RuleInput(private val hand: Hand, private val starterCard: Card, private v
 
     fun getStarterCard(): Card { return starterCard }
 
-    fun getHasCrib(): Boolean { return hasCrib }
+    fun isCrib(): Boolean { return isCrib }
 
     fun getUniqueCombinations(): Set<Set<Card>> { return uniqueCombinations }
 

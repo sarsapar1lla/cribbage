@@ -2,10 +2,23 @@ package engine
 
 import engine.card.Card
 
-class Hand(private val cards: Set<Card>) {
+class Hand(private val cards: MutableSet<Card> = mutableSetOf()) {
+
+    fun removeCards(cards: Set<Card>) {
+        this.cards.removeAll(cards)
+    }
 
     fun getCards(): Set<Card> {
-        return cards;
+        return cards
+    }
+
+    fun getSortedCards(): List<Card> {
+        return cards.sortedWith(compareBy({it.getSuit()}, {it.getRank()}))
+    }
+
+    fun replaceCards(cards: Set<Card>) {
+        this.cards.clear()
+        this.cards.addAll(cards)
     }
 
     private fun findUniqueCombinationsOfLengthN(cards: Set<Card>, n: Int): MutableSet<MutableSet<Card>> {

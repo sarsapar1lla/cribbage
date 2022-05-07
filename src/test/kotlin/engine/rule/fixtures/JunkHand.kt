@@ -7,7 +7,7 @@ import engine.card.Suit
 
 class JunkHand {
 
-    private val cards = setOf(
+    private val cards = mutableSetOf(
         Card(Suit.HEARTS, Rank.EIGHT),
         Card(Suit.DIAMONDS, Rank.TWO),
         Card(Suit.DIAMONDS, Rank.FOUR),

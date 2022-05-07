@@ -19,13 +19,13 @@ class Runs : Rule {
     }
 
     override fun apply(ruleInput: RuleInput): Int {
-        val stackSize = ruleInput.getStack().size
+        val stackSize = ruleInput.getStack().getCards().size
         if (stackSize < 2) {
             return 0  // can't have a run of less than three
         }
         var longestRun = 0
         for (runLength in 3..stackSize + 1) {
-            val run = findRun(ruleInput.getStack(), ruleInput.getCard(), runLength)
+            val run = findRun(ruleInput.getStack().getCards(), ruleInput.getCard(), runLength)
             if (run > longestRun) {
                 longestRun = run
             }

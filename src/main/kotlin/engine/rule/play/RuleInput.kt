@@ -1,12 +1,13 @@
 package engine.rule.play
 
+import engine.round.Stack
 import engine.card.Card
 
-class RuleInput(private val stack: List<Card>, private val card: Card) {
+class RuleInput(private val stack: Stack, private val card: Card) {
 
-    private val runningTotal: Int = stack.sumOf { c -> c.getRank().cardValue } + card.getCardValue()
+    private val runningTotal: Int = stack.count() + card.getCardValue()
 
-    fun getStack(): List<Card> { return stack }
+    fun getStack(): Stack { return stack }
 
     fun getCard(): Card { return card }
 

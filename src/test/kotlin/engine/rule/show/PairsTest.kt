@@ -12,7 +12,7 @@ import kotlin.test.assertEquals
 
 class PairsTest {
 
-    private val cards = setOf(
+    private val cards = mutableSetOf(
         Card(Suit.SPADES, Rank.EIGHT),
         Card(Suit.CLUBS, Rank.EIGHT),
         Card(Suit.DIAMONDS, Rank.EIGHT),
