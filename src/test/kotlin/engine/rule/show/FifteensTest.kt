@@ -5,10 +5,9 @@ import engine.card.Card
 import engine.card.Rank
 import engine.card.Suit
 import engine.rule.fixtures.JunkHand
-import engine.rule.show.Fifteens
-import engine.rule.show.RuleInput
+
 import kotlin.test.Test
-import kotlin.test.assertEquals
+import org.assertj.core.api.Assertions.assertThat
 
 internal class FifteensTest {
 
@@ -24,14 +23,20 @@ internal class FifteensTest {
 
     @Test
     fun returnsCorrectCount() {
-        val fifteens = Fifteens().apply(ruleInput)
-        assertEquals(4, fifteens)
+        val expectedFifteens = listOf(
+            listOf(Card(Suit.DIAMONDS, Rank.SEVEN), Card(Suit.HEARTS, Rank.EIGHT)),
+            listOf(Card(Suit.DIAMONDS, Rank.ACE), Card(Suit.HEARTS, Rank.FOUR), Card(Suit.CLUBS, Rank.KING))
+        )
+        val summary = Fifteens().apply(ruleInput)
+        assertThat(summary.getScoringCombinations()).isEqualTo(expectedFifteens)
+        assertThat(summary.getPoints()).isEqualTo(4)
     }
 
     @Test
     fun returnsCorrectCountWithJunkHand() {
-        val fifteens = Fifteens().apply(RuleInput(JunkHand().hand(), starterCard))
-        assertEquals(0, fifteens)
+        val summary = Fifteens().apply(RuleInput(JunkHand().hand(), starterCard))
+        assertThat(summary.getScoringCombinations()).isEmpty()
+        assertThat(summary.getPoints()).isZero
     }
 
 }

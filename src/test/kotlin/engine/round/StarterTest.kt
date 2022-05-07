@@ -6,9 +6,9 @@ import engine.card.Suit
 import engine.player.PredictablePlayer
 import engine.rule.starter.RulesEngine
 import engine.ui.MockUI
+
 import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
+import org.assertj.core.api.Assertions.assertThat
 
 internal class StarterTest {
 
@@ -24,7 +24,7 @@ internal class StarterTest {
 
         starter.run(starterCard, dealer)
 
-        assertEquals(0, dealer.getScore())
+        assertThat(dealer.getScore()).isZero
     }
 
     @Test
@@ -34,8 +34,8 @@ internal class StarterTest {
 
         starter.run(starterCard, dealer)
 
-        assertEquals(2, dealer.getScore())
-        assertTrue(ui.messages.contains("Predictable scored 2 points for drawing a Jack!"))
+        assertThat(dealer.getScore()).isEqualTo(2)
+        assertThat(ui.messages).contains("Predictable scored 2 points for drawing a Jack!")
     }
 
 }

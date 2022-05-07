@@ -4,10 +4,11 @@ import engine.Hand
 import engine.card.Card
 import engine.card.Rank
 import engine.card.Suit
-import kotlin.test.Test
-import kotlin.test.assertEquals
 
-class FlushesTest {
+import kotlin.test.Test
+import org.assertj.core.api.Assertions.assertThat
+
+internal class FlushesTest {
 
     private val cards = mutableSetOf(
         Card(Suit.DIAMONDS, Rank.NINE),
@@ -23,30 +24,60 @@ class FlushesTest {
 
     @Test
     fun countsFourCardFlush() {
+        val expectedFlush = listOf(
+            listOf(
+                Card(Suit.DIAMONDS, Rank.TWO),
+                Card(Suit.DIAMONDS, Rank.EIGHT),
+                Card(Suit.DIAMONDS, Rank.NINE),
+                Card(Suit.DIAMONDS, Rank.KING)
+            )
+        )
         val ruleInput = ruleInput(Card(Suit.CLUBS, Rank.THREE))
-        val flushes = Flushes().apply(ruleInput)
-        assertEquals(4, flushes)
+        val summary = Flushes().apply(ruleInput)
+        assertThat(summary.getScoringCombinations()).isEqualTo(expectedFlush)
+        assertThat(summary.getPoints()).isEqualTo(4)
     }
 
     @Test
     fun countsFiveCardFlush() {
+        val expectedFlush = listOf(
+            listOf(
+                Card(Suit.DIAMONDS, Rank.TWO),
+                Card(Suit.DIAMONDS, Rank.THREE),
+                Card(Suit.DIAMONDS, Rank.EIGHT),
+                Card(Suit.DIAMONDS, Rank.NINE),
+                Card(Suit.DIAMONDS, Rank.KING)
+            )
+        )
         val ruleInput = ruleInput(Card(Suit.DIAMONDS, Rank.THREE))
-        val flushes = Flushes().apply(ruleInput)
-        assertEquals(5, flushes)
+        val summary = Flushes().apply(ruleInput)
+        assertThat(summary.getScoringCombinations()).isEqualTo(expectedFlush)
+        assertThat(summary.getPoints()).isEqualTo(5)
     }
 
     @Test
     fun countsFiveCardFlushWhenCrib() {
+        val expectedFlush = listOf(
+            listOf(
+                Card(Suit.DIAMONDS, Rank.TWO),
+                Card(Suit.DIAMONDS, Rank.THREE),
+                Card(Suit.DIAMONDS, Rank.EIGHT),
+                Card(Suit.DIAMONDS, Rank.NINE),
+                Card(Suit.DIAMONDS, Rank.KING)
+            )
+        )
         val ruleInput = ruleInput(Card(Suit.DIAMONDS, Rank.THREE))
-        val flushes = Flushes().apply(ruleInput)
-        assertEquals(5, flushes)
+        val summary = Flushes().apply(ruleInput)
+        assertThat(summary.getScoringCombinations()).isEqualTo(expectedFlush)
+        assertThat(summary.getPoints()).isEqualTo(5)
     }
 
     @Test
     fun doesNotCountFourCardFlushWhenCrib() {
         val ruleInput = ruleInput(Card(Suit.HEARTS, Rank.THREE), true)
-        val flushes = Flushes().apply(ruleInput)
-        assertEquals(0, flushes)
+        val summary = Flushes().apply(ruleInput)
+        assertThat(summary.getScoringCombinations()).isEmpty()
+        assertThat(summary.getPoints()).isZero
     }
 
 }

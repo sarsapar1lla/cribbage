@@ -4,13 +4,11 @@ import engine.Hand
 import engine.card.Card
 import engine.card.Suit
 import engine.card.Rank
-import engine.rule.show.Pairs
-import engine.rule.show.RuleInput
 
 import kotlin.test.Test
-import kotlin.test.assertEquals
+import org.assertj.core.api.Assertions.assertThat
 
-class PairsTest {
+internal class PairsTest {
 
     private val cards = mutableSetOf(
         Card(Suit.SPADES, Rank.EIGHT),
@@ -24,8 +22,15 @@ class PairsTest {
 
     @Test
     fun countsCorrectNumberOfPairs() {
-        val pairs = Pairs().apply(ruleInput)
-        assertEquals(8, pairs)
+        val expectedPairs = listOf(
+            listOf(Card(Suit.CLUBS, Rank.EIGHT), Card(Suit.DIAMONDS, Rank.EIGHT)),
+            listOf(Card(Suit.CLUBS, Rank.EIGHT), Card(Suit.SPADES, Rank.EIGHT)),
+            listOf(Card(Suit.DIAMONDS, Rank.EIGHT), Card(Suit.SPADES, Rank.EIGHT)),
+            listOf(Card(Suit.CLUBS, Rank.KING), Card(Suit.DIAMONDS, Rank.KING))
+        )
+        val summary = Pairs().apply(ruleInput)
+        assertThat(summary.getScoringCombinations()).hasSameElementsAs(expectedPairs)
+        assertThat(summary.getPoints()).isEqualTo(8)
     }
 
 }

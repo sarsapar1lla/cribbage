@@ -4,10 +4,11 @@ import engine.Hand
 import engine.card.Card
 import engine.card.Rank
 import engine.card.Suit
-import kotlin.test.Test
-import kotlin.test.assertEquals
 
-class RulesEngineTest {
+import kotlin.test.Test
+import org.assertj.core.api.Assertions.assertThat
+
+internal class RulesEngineTest {
 
     private val cards = mutableSetOf(
         Card(Suit.CLUBS, Rank.SEVEN),
@@ -21,8 +22,8 @@ class RulesEngineTest {
     fun calculatesCorrectScore() {
         val starterCard = Card(Suit.DIAMONDS, Rank.FIVE)
         val ruleInput = RuleInput(hand, starterCard)
-        val score = RulesEngine().score(ruleInput)
-        assertEquals(12, score)
+        val summary = RulesEngine().score(ruleInput)
+        assertThat(summary.getScore()).isEqualTo(12)
     }
 
 }

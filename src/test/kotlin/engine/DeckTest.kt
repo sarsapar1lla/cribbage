@@ -1,43 +1,42 @@
 package engine
 
 import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
+import org.assertj.core.api.Assertions.assertThat
 
-class DeckTest {
+internal class DeckTest {
 
     private val deck = Deck(false)
 
     @Test
     fun has52Cards() {
-        assertEquals(52, deck.getRemainingCards().size)
+        assertThat(deck.getRemainingCards()).hasSize(52)
     }
 
     @Test
     fun allCardsAreUnique() {
-        assertEquals(52, deck.getRemainingCards().distinct().size)
+        assertThat(deck.getRemainingCards().distinct()).hasSize(52)
     }
 
     @Test
     fun dealsTwoHandsOfSixCards() {
         val (cutterCards, dealerCards) = deck.deal()
-        assertEquals(6, cutterCards.size)
-        assertEquals(6, dealerCards.size)
+        assertThat(cutterCards).hasSize(6)
+        assertThat(dealerCards).hasSize(6)
     }
 
     @Test
     fun dealtCardsMatch() {
         val (cutterCards, dealerCards) = deck.deal()
         val cards = cutterCards + dealerCards
-        assertEquals(cards, deck.getDealtCards().toSet())
+        assertThat(deck.getDealtCards().toSet()).isEqualTo(cards)
     }
 
     @Test
     fun remainingCardsAreCorrect() {
         val (cutterCards, dealerCards) = deck.deal()
         val cards = cutterCards + dealerCards
-        assertEquals(40, deck.getRemainingCards().size)
-        assertTrue(cards.none { c -> deck.getRemainingCards().contains(c) })
+        assertThat(deck.getRemainingCards()).hasSize(40)
+        assertThat(cards).noneMatch { c -> deck.getRemainingCards().contains(c) }
     }
 
 }

@@ -8,10 +8,10 @@ import engine.card.Suit
 import engine.player.PredictablePlayer
 import engine.rule.RulesEngine
 import engine.ui.MockUI
+
 import kotlin.test.Ignore
 import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
+import org.assertj.core.api.Assertions.assertThat
 
 internal class RoundTest {
 
@@ -29,7 +29,7 @@ internal class RoundTest {
 
         round.play(dealer, cutter)
 
-        assertTrue(true)
+        assertThat(true).isTrue
     }
 
 }

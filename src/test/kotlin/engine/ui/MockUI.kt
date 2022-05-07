@@ -1,6 +1,8 @@
 package engine.ui
 
-class MockUI(private val discardChoices: Set<Int> = emptySet(), private val playCardChoice: Int = 1) : UserInterface {
+import engine.rule.ScoreSummary
+
+internal class MockUI(private val discardChoices: Set<Int> = emptySet(), private val playCardChoice: Int = 1) : UserInterface {
 
     val messages = mutableListOf<String>()
 
@@ -14,7 +16,7 @@ class MockUI(private val discardChoices: Set<Int> = emptySet(), private val play
 
     override fun displayPlayPoints(selectedCard: String, playerName: String, pointsScored: Int, totalScore: Int) {}
 
-    override fun displayHandPoints(playerName: String, pointsScored: Int, totalScore: Int, isCrib: Boolean) {}
+    override fun displayHandPoints(playerName: String, scoreSummary: ScoreSummary, totalScore: Int, isCrib: Boolean) {}
 
     override fun promptPlayerToDiscard(cardsText: List<String>): Set<Int> {
         return discardChoices
