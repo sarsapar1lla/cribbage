@@ -14,8 +14,12 @@ data class Card(private val suit: Suit, private val rank: Rank) {
         return rank.cardValue
     }
 
+    fun isPlayable(stackCount: Int, maxCount: Int): Boolean {
+        return stackCount + rank.cardValue <= maxCount
+    }
+
     override fun toString(): String {
-        return "${rank.cardValue}${suit.displayName}"
+        return "${rank.displayName}${suit.displayName}"
     }
 
 }

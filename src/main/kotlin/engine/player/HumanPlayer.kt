@@ -13,8 +13,8 @@ class HumanPlayer(playerName: String, private val ui: UserInterface) : Player(pl
         return chosenDiscards
     }
 
-    override fun playCard(): Card {
-        val cards = hand.getSortedCards()
+    override fun playCard(cardsPlayed: Set<Card>, stackCount: Int, maxCount: Int): Card {
+        val cards = getPlayableCards(cardsPlayed, stackCount, maxCount)
         val chosenCardIndex = ui.promptPlayerToPlayCard(cards.map { c -> c.toString() })
         return cards[chosenCardIndex - 1]
     }

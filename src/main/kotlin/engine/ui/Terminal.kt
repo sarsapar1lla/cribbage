@@ -3,18 +3,40 @@ package engine.ui
 class Terminal : UserInterface {
 
     override fun clearDisplay() {
-        println("\n")
+        // println("\u001b[H\u001b[2J")
+        println("CLEARING...")
+    }
+
+    override fun displayMessage(message: String) {
+        println(message)
+    }
+
+    override fun displayStack(stack: List<String>, count: Int) {
+        clearDisplay()
+        println("Current stack: ${stack.joinToString("\t")}")
+        println("(Total: $count)")
+        readln()
     }
 
     override fun displayHand(cardsText: List<String>) {
         val separator = "\t"
-        clearDisplay()
         println(cardsText.joinToString(separator))
         println(List(cardsText.size) { index -> index + 1 }.joinToString(separator))
     }
 
-    override fun displayPoints(playerName: String, pointsScored: Int, totalScore: Int) {
-        println("$playerName scored $pointsScored points! (Total: $totalScore)")
+    override fun displayPlayPoints(selectedCard: String, playerName: String, pointsScored: Int, totalScore: Int) {
+        println("$playerName played $selectedCard for $pointsScored points! (Total: $totalScore)")
+        readln()
+    }
+
+    override fun displayHandPoints(playerName: String, pointsScored: Int, totalScore: Int, isCrib: Boolean) {
+        val handName = if (isCrib) {
+            "crib"
+        } else {
+            "hand"
+        }
+        println("$playerName's $handName scored $pointsScored points! (Total: $totalScore)")
+        readln()
     }
 
     private fun getValidSelections(cardsText: List<String>): List<String> {
@@ -22,16 +44,24 @@ class Terminal : UserInterface {
     }
 
     override fun promptPlayerToDiscard(cardsText: List<String>): Set<Int> {
+        clearDisplay()
         val validSelections = getValidSelections(cardsText)
         while (true) {
             println("Choose two cards to discard from your hand (e.g. '3 4'):")
             displayHand(cardsText)
             val selections = readln().trim().split(" ").map { s -> s.trim() }
+            if (selections.size != 2) {
+                println("You must choose exactly two cards...")
+                readln()
+                clearDisplay()
+                continue
+            }
             val areValid = selections.all { s -> validSelections.contains(s) }
             if (areValid) {
                 return selections.map { s -> s.toInt() }.toSet()
             }
             println("$selections are not not valid choices")
+            readln()
             clearDisplay()
         }
 
@@ -48,6 +78,7 @@ class Terminal : UserInterface {
                 return selection.toInt()
             }
             println("$selection is not a valid choice")
+            readln()
             clearDisplay()
         }
     }

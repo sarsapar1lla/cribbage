@@ -9,6 +9,16 @@ class DeckTest {
     private val deck = Deck(false)
 
     @Test
+    fun has52Cards() {
+        assertEquals(52, deck.getRemainingCards().size)
+    }
+
+    @Test
+    fun allCardsAreUnique() {
+        assertEquals(52, deck.getRemainingCards().distinct().size)
+    }
+
+    @Test
     fun dealsTwoHandsOfSixCards() {
         val (cutterCards, dealerCards) = deck.deal()
         assertEquals(6, cutterCards.size)

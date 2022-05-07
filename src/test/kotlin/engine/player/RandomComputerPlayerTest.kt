@@ -3,15 +3,13 @@ package engine.player
 import engine.card.Card
 import engine.card.Rank
 import engine.card.Suit
-import engine.ui.MockUI
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-class HumanPlayerTest {
+class RandomComputerPlayerTest {
 
-    private val mockUI = MockUI(setOf(1, 2), 1)
-    private val player = HumanPlayer("Tester", mockUI)
+    private val player = RandomComputerPlayer("Tester")
 
     val cards = setOf(
         Card(Suit.CLUBS, Rank.EIGHT),
@@ -20,19 +18,17 @@ class HumanPlayerTest {
     )
 
     @Test
-    fun discardsCorrectCards() {
+    fun discardsTwoCards() {
         player.giveCards(cards)
         val discarded = player.discard()
         assertEquals(2, discarded.size)
-        assertEquals(setOf(Card(Suit.HEARTS, Rank.ACE), Card(Suit.CLUBS, Rank.EIGHT)), discarded)
         assertTrue(discarded.none { c -> player.getHand().getCards().contains(c) })
     }
 
     @Test
-    fun selectsCorrectPlayCard() {
+    fun selectsACard() {
         player.giveCards(cards)
         val selectedCard = player.playCard(emptySet(), 0, 31)
-        assertEquals(Card(Suit.HEARTS, Rank.ACE), selectedCard)
         assertTrue(player.getHand().getCards().contains(selectedCard))  // card is still in hand
     }
 

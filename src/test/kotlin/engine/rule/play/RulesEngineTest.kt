@@ -1,18 +1,20 @@
 package engine.rule.play
 
+import engine.round.Stack
 import engine.card.Card
 import engine.card.Rank
 import engine.card.Suit
-import org.junit.jupiter.api.assertThrows
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class RulesEngineTest {
 
-    private val stack = listOf(
-        Card(Suit.HEARTS, Rank.ACE),
-        Card(Suit.CLUBS, Rank.FOUR),
-        Card(Suit.DIAMONDS, Rank.THREE)
+    private val stack = Stack(
+        mutableListOf(
+            Card(Suit.HEARTS, Rank.ACE),
+            Card(Suit.CLUBS, Rank.FOUR),
+            Card(Suit.DIAMONDS, Rank.THREE)
+        )
     )
     private fun ruleInput(card: Card): RuleInput { return RuleInput(stack, card) }
 
@@ -39,27 +41,17 @@ class RulesEngineTest {
 
     @Test
     fun calculatesCorrectScoreThirtyOne() {
-        val stack = listOf(
-            Card(Suit.HEARTS, Rank.TEN),
-            Card(Suit.DIAMONDS, Rank.QUEEN),
-            Card(Suit.CLUBS, Rank.SEVEN)
+        val stack = Stack(
+            mutableListOf(
+                Card(Suit.HEARTS, Rank.TEN),
+                Card(Suit.DIAMONDS, Rank.QUEEN),
+                Card(Suit.CLUBS, Rank.SEVEN)
+            )
         )
         val card = Card(Suit.CLUBS, Rank.FOUR)
         val ruleInput = RuleInput(stack, card)
         val score = RulesEngine().score(ruleInput)
         assertEquals(2, score)
-    }
-
-    @Test
-    fun throwsExceptionIfMaximumCountExceeded() {
-        val stack = listOf(
-            Card(Suit.HEARTS, Rank.TEN),
-            Card(Suit.DIAMONDS, Rank.QUEEN),
-            Card(Suit.CLUBS, Rank.SEVEN)
-        )
-        val card = Card(Suit.CLUBS, Rank.FIVE)
-        val ruleInput = RuleInput(stack, card)
-        assertThrows<MaximumCountExceededException> { RulesEngine().score(ruleInput) }
     }
 
 }

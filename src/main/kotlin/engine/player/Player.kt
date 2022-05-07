@@ -26,8 +26,16 @@ abstract class Player(private val playerName: String) {
         hand.replaceCards(cards)
     }
 
+    fun canGo(cardsPlayed: Set<Card>, stackCount: Int, maxCount: Int): Boolean {
+        return getPlayableCards(cardsPlayed, stackCount, maxCount).isNotEmpty()
+    }
+
+    protected fun getPlayableCards(cardsPlayed: Set<Card>, stackCount: Int, maxCount: Int): List<Card> {
+        return hand.getSortedCards().filter { c -> c !in cardsPlayed && c.isPlayable(stackCount, maxCount)}
+    }
+
     abstract fun discard(): Set<Card>
 
-    abstract fun playCard(): Card
+    abstract fun playCard(cardsPlayed: Set<Card>, stackCount: Int, maxCount: Int): Card
 
 }
