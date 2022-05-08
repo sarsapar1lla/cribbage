@@ -12,7 +12,7 @@ interface UserInterface {
 
     fun displayHand(cardsText: List<String>)
 
-    fun displayPlayPoints(selectedCard: String, playerName: String, pointsScored: Int, totalScore: Int)
+    fun displayPlayPoints(selectedCard: String, playerName: String, scoreSummary: ScoreSummary, totalScore: Int)
 
     fun displayHandPoints(playerName: String, scoreSummary: ScoreSummary, totalScore: Int, isCrib: Boolean = false)
 

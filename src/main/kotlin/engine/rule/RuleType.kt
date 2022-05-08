@@ -1,8 +1,8 @@
 package engine.rule
 
 enum class RuleType {
-    COUNT_REACHED,
     FIFTEEN,
+    THIRTY_ONE,
     PAIR,
     RUN,
     FLUSH,

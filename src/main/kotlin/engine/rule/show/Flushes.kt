@@ -2,6 +2,7 @@ package engine.rule.show
 
 import engine.rule.RuleSummary
 import engine.rule.RuleType
+import engine.rule.emptyRuleSummary
 
 class Flushes : Rule {
 
@@ -15,7 +16,7 @@ class Flushes : Rule {
     override fun apply(ruleInput: RuleInput): RuleSummary {
         val uniqueSuits = ruleInput.getHand().getCards().map { c -> c.getSuit() }.distinct()
         if (uniqueSuits.size > 1) {
-            return RuleSummary(ruleType, 0, emptySet())
+            return emptyRuleSummary(ruleType)
         }
         val starterHasSameSuit = uniqueSuits.contains(ruleInput.getStarterCard().getSuit())
         if (starterHasSameSuit) {
@@ -26,7 +27,7 @@ class Flushes : Rule {
             )
         }
         if (ruleInput.isCrib()) {
-            return RuleSummary(ruleType, 0, emptySet())  // crib can only score a five-card flush
+            return emptyRuleSummary(ruleType)  // crib can only score a five-card flush
         }
         return RuleSummary(ruleType, fourCardFlushPoints, setOf(ruleInput.getHand().getCards()))
     }

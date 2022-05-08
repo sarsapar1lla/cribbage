@@ -3,6 +3,7 @@ package engine.rule.show
 import engine.card.Card
 import engine.rule.RuleSummary
 import engine.rule.RuleType
+import engine.rule.emptyRuleSummary
 
 class Runs : Rule {
 
@@ -29,7 +30,7 @@ class Runs : Rule {
         val maxRunLength = runs.maxOfOrNull { it.size } ?: 0
 
         if (maxRunLength == 0) {
-            return RuleSummary(ruleType, 0, emptySet())
+            return emptyRuleSummary(ruleType)
         }
         return RuleSummary(
             ruleType,

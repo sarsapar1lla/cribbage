@@ -26,8 +26,16 @@ class Terminal : UserInterface {
         println(List(cardsText.size) { index -> index + 1 }.joinToString(separator))
     }
 
-    override fun displayPlayPoints(selectedCard: String, playerName: String, pointsScored: Int, totalScore: Int) {
-        println("$playerName played $selectedCard for $pointsScored points! (Total: $totalScore)")
+    override fun displayPlayPoints(selectedCard: String, playerName: String, scoreSummary: ScoreSummary, totalScore: Int) {
+        println("$playerName played $selectedCard for ${scoreSummary.getScore()} points! (Total: $totalScore)")
+        scoreSummary.getSortedSummaries().forEach {
+            if (it.getScoringCombinations().isNotEmpty()) {
+                val ruleType = it.getRuleType()
+                it.getScoringCombinations().forEach {
+                        c -> println("$ruleType of $c")
+                }
+            }
+        }
         readln()
     }
 

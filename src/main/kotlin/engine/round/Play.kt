@@ -25,10 +25,10 @@ class Play(private val rulesEngine: RulesEngine, private val ui: UserInterface) 
         ui.displayStack(stack.getCardStrings(), stack.count())
         val selectedCard = player.playCard(cardsPlayed, stack.count(), stack.getMaxCount())
         val ruleInput = RuleInput(stack, selectedCard)
-        val points = rulesEngine.score(ruleInput)
+        val summary = rulesEngine.score(ruleInput)
 
-        player.addPoints(points)
-        ui.displayPlayPoints(selectedCard.toString(), player.getPlayerName(), points, player.getScore())
+        player.addPoints(summary.getScore())
+        ui.displayPlayPoints(selectedCard.toString(), player.getPlayerName(), summary, player.getScore())
 
         stack.addCard(selectedCard)
         cardsPlayed.add(selectedCard)

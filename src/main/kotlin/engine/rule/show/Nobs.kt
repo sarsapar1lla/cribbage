@@ -4,6 +4,7 @@ import engine.card.Card
 import engine.card.Rank
 import engine.rule.RuleSummary
 import engine.rule.RuleType
+import engine.rule.emptyRuleSummary
 
 class Nobs : Rule {
 
@@ -22,7 +23,7 @@ class Nobs : Rule {
             )
             RuleSummary(ruleType, points, setOf(scoringCombination))
         } else {
-            RuleSummary(ruleType, 0, emptySet())
+            emptyRuleSummary(ruleType)
         }
     }
 }

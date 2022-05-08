@@ -4,8 +4,9 @@ import engine.round.Stack
 import engine.card.Card
 import engine.card.Rank
 import engine.card.Suit
+
 import kotlin.test.Test
-import kotlin.test.assertEquals
+import org.assertj.core.api.Assertions.assertThat
 
 class CountReachedTest {
 
@@ -29,30 +30,45 @@ class CountReachedTest {
 
     @Test
     fun scoresFifteen() {
+        val expectedCombination = listOf(
+            listOf(Card(Suit.DIAMONDS, Rank.THREE), Card(Suit.CLUBS, Rank.FOUR), Card(Suit.HEARTS, Rank.EIGHT))
+        )
         val card = Card(Suit.HEARTS, Rank.EIGHT)
-        val fifteen = CountReached(15).apply(fifteenRuleInput(card))
-        assertEquals(2, fifteen)
+        val summary = CountReached(DesiredCount.FIFTEEN).apply(fifteenRuleInput(card))
+        assertThat(summary.getScoringCombinations()).isEqualTo(expectedCombination)
+        assertThat(summary.getPoints()).isEqualTo(2)
     }
 
     @Test
     fun scoresNotFifteen() {
         val card = Card(Suit.HEARTS, Rank.NINE)
-        val fifteen = CountReached(15).apply(fifteenRuleInput(card))
-        assertEquals(0, fifteen)
+        val summary = CountReached(DesiredCount.FIFTEEN).apply(fifteenRuleInput(card))
+        assertThat(summary.getScoringCombinations()).isEmpty()
+        assertThat(summary.getPoints()).isZero
     }
 
     @Test
     fun scoresThirtyOne() {
+        val expectedCombination = listOf(
+            listOf(
+                Card(Suit.HEARTS, Rank.THREE),
+                Card(Suit.CLUBS, Rank.EIGHT),
+                Card(Suit.DIAMONDS, Rank.TEN),
+                Card(Suit.CLUBS, Rank.QUEEN)
+            )
+        )
         val card = Card(Suit.HEARTS, Rank.THREE)
-        val thirtyOne = CountReached(31).apply(thirtyOneRuleInput(card))
-        assertEquals(2, thirtyOne)
+        val summary = CountReached(DesiredCount.THIRTY_ONE).apply(thirtyOneRuleInput(card))
+        assertThat(summary.getScoringCombinations()).isEqualTo(expectedCombination)
+        assertThat(summary.getPoints()).isEqualTo(2)
     }
 
     @Test
     fun scoresNotThirtyOne() {
         val card = Card(Suit.HEARTS, Rank.ACE)
-        val thirtyOne = CountReached(31).apply(thirtyOneRuleInput(card))
-        assertEquals(0, thirtyOne)
+        val summary = CountReached(DesiredCount.THIRTY_ONE).apply(thirtyOneRuleInput(card))
+        assertThat(summary.getScoringCombinations()).isEmpty()
+        assertThat(summary.getPoints()).isZero
     }
 
 }

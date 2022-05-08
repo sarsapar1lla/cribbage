@@ -14,7 +14,7 @@ internal class MockUI(private val discardChoices: Set<Int> = emptySet(), private
 
     override fun displayHand(cardsText: List<String>) {}
 
-    override fun displayPlayPoints(selectedCard: String, playerName: String, pointsScored: Int, totalScore: Int) {}
+    override fun displayPlayPoints(selectedCard: String, playerName: String, scoreSummary: ScoreSummary, totalScore: Int) {}
 
     override fun displayHandPoints(playerName: String, scoreSummary: ScoreSummary, totalScore: Int, isCrib: Boolean) {}
 
