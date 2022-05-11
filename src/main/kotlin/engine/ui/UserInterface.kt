@@ -7,7 +7,7 @@ interface UserInterface {
     fun clearDisplay()
 
     fun displayMessage(message: String)
-
+    
     fun displayStack(stack: List<String>, count: Int)
 
     fun displayHand(cardsText: List<String>)
