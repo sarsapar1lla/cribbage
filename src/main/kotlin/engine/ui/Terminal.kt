@@ -5,17 +5,17 @@ import engine.rule.ScoreSummary
 class Terminal : UserInterface {
 
     override fun clearDisplay() {
-        // println("\u001b[H\u001b[2J")
-        println("CLEARING...")
+        println("\u001b[H\u001b[2J")
     }
 
     override fun displayMessage(message: String) {
         println(message)
+        readln()
     }
 
     override fun displayStack(stack: List<String>, count: Int) {
         clearDisplay()
-        println("Current stack: ${stack.joinToString("\t")}")
+        println("Current stack: ${stack.joinToString("  ")}")
         println("(Total: $count)")
         readln()
     }
@@ -32,7 +32,7 @@ class Terminal : UserInterface {
             if (it.scoringCombinations().isNotEmpty()) {
                 val ruleType = it.ruleType()
                 it.scoringCombinations().forEach {
-                        c -> println("$ruleType of $c")
+                        c -> println("${ruleType.displayName} of $c")
                 }
             }
         }
@@ -50,7 +50,7 @@ class Terminal : UserInterface {
             if (it.scoringCombinations().isNotEmpty()) {
                 val ruleType = it.ruleType()
                 it.scoringCombinations().forEach {
-                    c -> println("$ruleType of $c")
+                    c -> println("${ruleType.displayName} of $c")
                 }
             }
         }
