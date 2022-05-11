@@ -1,6 +1,7 @@
 package engine.rule.starter
 
 import engine.card.Card
+import engine.rule.ScoreSummary
 
 class RulesEngine {
 
@@ -8,8 +9,8 @@ class RulesEngine {
         Heels()
     )
 
-    fun score(starterCard: Card): Int {
-        return rules.sumOf { r -> r.apply(starterCard) }
+    fun score(starterCard: Card): ScoreSummary {
+        return ScoreSummary(rules.map { r -> r.apply(starterCard) })
     }
 
 }
