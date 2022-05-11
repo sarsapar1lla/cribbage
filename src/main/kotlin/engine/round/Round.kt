@@ -22,7 +22,7 @@ class Round(rulesEngine: RulesEngine, private val ui: UserInterface, private val
         dealerDiscards.await() + cutterDiscards.await()
     }
 
-    private fun getStarterCard(deck: Deck): Card {
+    private fun dealStarterCard(deck: Deck): Card {
         return deck.dealOne()
     }
 
@@ -31,7 +31,7 @@ class Round(rulesEngine: RulesEngine, private val ui: UserInterface, private val
         dealer.giveCards(dealerCards)
         cutter.giveCards(cutterCards)
 
-        ui.displayMessage("${dealer.getPlayerName()} is the dealer this round")
+        ui.displayMessage("${dealer.playerName()} is the dealer this round")
 
         // Running discard methods for both players simultaneously to save time
         val crib = runBlocking {
@@ -39,8 +39,8 @@ class Round(rulesEngine: RulesEngine, private val ui: UserInterface, private val
             Hand(cribCards.toMutableSet())
         }
 
-        val starterCard = getStarterCard(deck)
-        ui.displayMessage("${dealer.getPlayerName()} drew $starterCard as the starterCard!")
+        val starterCard = dealStarterCard(deck)
+        ui.displayMessage("${dealer.playerName()} drew $starterCard as the starterCard!")
         starter.run(starterCard, dealer)
         play.run(dealer, cutter)
         show.run(dealer, cutter, crib, starterCard)

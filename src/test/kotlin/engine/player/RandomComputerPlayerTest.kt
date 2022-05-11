@@ -3,11 +3,11 @@ package engine.player
 import engine.card.Card
 import engine.card.Rank
 import engine.card.Suit
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
-class RandomComputerPlayerTest {
+import kotlin.test.Test
+import org.assertj.core.api.Assertions.assertThat
+
+internal class RandomComputerPlayerTest {
 
     private val player = RandomComputerPlayer("Tester")
 
@@ -21,15 +21,16 @@ class RandomComputerPlayerTest {
     fun discardsTwoCards() {
         player.giveCards(cards)
         val discarded = player.discard()
-        assertEquals(2, discarded.size)
-        assertTrue(discarded.none { c -> player.getHand().getCards().contains(c) })
+        assertThat(discarded)
+            .hasSize(2)
+            .noneMatch { c -> player.hand().getCards().contains(c) }
     }
 
     @Test
     fun selectsACard() {
         player.giveCards(cards)
         val selectedCard = player.playCard(emptySet(), 0, 31)
-        assertTrue(player.getHand().getCards().contains(selectedCard))  // card is still in hand
+        assertThat(selectedCard).isIn(player.hand().getCards())
     }
 
 }

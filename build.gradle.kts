@@ -30,10 +30,15 @@ repositories {
     mavenCentral()
 }
 
+val kotlinxVersion = "1.6.1"
+val kotlinVersion = "1.6.20"
+val assertJVersion = "3.22.0"
+
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.6.20")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinxVersion}")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}")
     testImplementation(kotlin("test"))
+    testImplementation("org.assertj:assertj-core:${assertJVersion}")
 }
 
 tasks.test {

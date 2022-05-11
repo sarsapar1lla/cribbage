@@ -4,12 +4,11 @@ import engine.Hand
 import engine.card.Card
 import engine.card.Rank
 import engine.card.Suit
-import engine.rule.show.Nobs
-import engine.rule.show.RuleInput
-import kotlin.test.Test
-import kotlin.test.assertEquals
 
-class NobsTest {
+import kotlin.test.Test
+import org.assertj.core.api.Assertions.assertThat
+
+internal class NobsTest {
 
     private val cards = mutableSetOf(
         Card(Suit.SPADES, Rank.EIGHT),
@@ -25,14 +24,17 @@ class NobsTest {
 
     @Test
     fun countsNobs() {
-        val nobs = Nobs().apply(ruleInput(Card(Suit.DIAMONDS, Rank.KING)))
-        assertEquals(1, nobs)
+        val expectedCombinations = listOf(listOf(Card(Suit.DIAMONDS, Rank.JACK), Card(Suit.DIAMONDS, Rank.KING)))
+        val summary = Nobs().apply(ruleInput(Card(Suit.DIAMONDS, Rank.KING)))
+        assertThat(summary.scoringCombinations()).isEqualTo(expectedCombinations)
+        assertThat(summary.points()).isEqualTo(1)
     }
 
     @Test
     fun countsNotNobs() {
-        val nobs = Nobs().apply(ruleInput(Card(Suit.CLUBS, Rank.KING)))
-        assertEquals(0, nobs)
+        val summary = Nobs().apply(ruleInput(Card(Suit.CLUBS, Rank.KING)))
+        assertThat(summary.scoringCombinations()).isEmpty()
+        assertThat(summary.points()).isZero
     }
 
 }

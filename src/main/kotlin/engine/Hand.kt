@@ -13,7 +13,7 @@ class Hand(private val cards: MutableSet<Card> = mutableSetOf()) {
     }
 
     fun getSortedCards(): List<Card> {
-        return cards.sortedWith(compareBy({it.getSuit()}, {it.getRank()}))
+        return cards.sortedWith(compareBy({it.suit()}, {it.rank()}))
     }
 
     fun replaceCards(cards: Set<Card>) {

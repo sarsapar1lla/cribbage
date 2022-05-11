@@ -7,8 +7,9 @@ import engine.card.Suit
 import engine.player.PredictablePlayer
 import engine.rule.show.RulesEngine
 import engine.ui.MockUI
+
 import kotlin.test.Test
-import kotlin.test.assertEquals
+import org.assertj.core.api.Assertions.assertThat
 
 internal class ShowTest {
 
@@ -49,8 +50,8 @@ internal class ShowTest {
 
         show.run(player1, player2, crib, startedCard)
 
-        assertEquals(8, player1.getScore())
-        assertEquals(4, player2.getScore())
+        assertThat(player1.score()).isEqualTo(8)
+        assertThat(player2.score()).isEqualTo(4)
 
     }
 

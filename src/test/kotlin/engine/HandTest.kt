@@ -3,11 +3,11 @@ package engine
 import engine.card.Card
 import engine.card.Rank
 import engine.card.Suit
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
-class HandTest {
+import kotlin.test.Test
+import org.assertj.core.api.Assertions.assertThat
+
+internal class HandTest {
 
     private val cards = mutableSetOf(
         Card(Suit.CLUBS, Rank.KING),
@@ -21,7 +21,7 @@ class HandTest {
     @Test
     fun findsCorrectNumberOfUniqueCombinations() {
         val uniqueCombinations = hand.findUniqueCombinations(Card(Suit.SPADES, Rank.JACK))
-        assertEquals(uniqueCombinations.size, 31)
+        assertThat(uniqueCombinations).hasSize(31)
     }
 
     @Test
@@ -31,8 +31,8 @@ class HandTest {
             Card(Suit.DIAMONDS, Rank.FOUR)
         )
         hand.removeCards(cardsToRemove)
-        assertEquals(2, hand.getCards().size)
-        assertTrue(cardsToRemove.none { c -> hand.getCards().contains(c) })
+        assertThat(hand.getCards()).hasSize(2)
+        assertThat(cardsToRemove).noneMatch { c -> hand.getCards().contains(c) }
     }
 
     @Test
@@ -44,7 +44,7 @@ class HandTest {
             Card(Suit.DIAMONDS, Rank.FOUR)
         )
         val sortedCards = hand.getSortedCards()
-        assertEquals(expectedSort, sortedCards)
+        assertThat(sortedCards).isEqualTo(expectedSort)
     }
 
     @Test
@@ -53,7 +53,7 @@ class HandTest {
             Card(Suit.SPADES, Rank.ACE)
         )
         hand.replaceCards(newCards)
-        assertEquals(newCards, hand.getCards())
+        assertThat(hand.getCards()).isEqualTo(newCards)
     }
 
 }

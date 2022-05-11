@@ -6,9 +6,9 @@ import engine.card.Suit
 import engine.player.PredictablePlayer
 import engine.rule.play.RulesEngine
 import engine.ui.MockUI
+
 import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
+import org.assertj.core.api.Assertions.assertThat
 
 internal class PlayTest {
 
@@ -29,9 +29,10 @@ internal class PlayTest {
             )
         )
         play.playCard(player, stack)
-        assertEquals(2, player.getScore())
-        assertTrue(cards.first() in stack.getCards())
-        assertTrue(cards.first() in play.getCardsPlayed())
+        assertThat(player.score()).isEqualTo(2)
+        assertThat(cards.first())
+            .isIn(stack.cards())
+            .isIn(play.cardsPlayed())
     }
 
     @Test
@@ -54,8 +55,8 @@ internal class PlayTest {
 
         play.run(player1, player2)
 
-        assertEquals(4, player2.getScore())
-        assertEquals(11, player1.getScore())
+        assertThat(player1.score()).isEqualTo(11)
+        assertThat(player2.score()).isEqualTo(4)
 
     }
 
@@ -81,8 +82,9 @@ internal class PlayTest {
 
         play.run(player1, player2)
 
-        assertEquals(3, player1.getScore())
-        assertEquals(2, player2.getScore())
+        assertThat(player1.score()).isEqualTo(3)
+        assertThat(player2.score()).isEqualTo(2)
+
     }
 
     @Test
@@ -108,8 +110,8 @@ internal class PlayTest {
 
         play.run(player1, player2)
 
-        assertEquals(3, player1.getScore())
-        assertEquals(3, player2.getScore())
+        assertThat(player1.score()).isEqualTo(3)
+        assertThat(player2.score()).isEqualTo(3)
     }
 
 }

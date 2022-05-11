@@ -1,5 +1,7 @@
 package engine.ui
 
+import engine.rule.ScoreSummary
+
 class Terminal : UserInterface {
 
     override fun clearDisplay() {
@@ -24,18 +26,34 @@ class Terminal : UserInterface {
         println(List(cardsText.size) { index -> index + 1 }.joinToString(separator))
     }
 
-    override fun displayPlayPoints(selectedCard: String, playerName: String, pointsScored: Int, totalScore: Int) {
-        println("$playerName played $selectedCard for $pointsScored points! (Total: $totalScore)")
+    override fun displayPlayPoints(selectedCard: String, playerName: String, scoreSummary: ScoreSummary, totalScore: Int) {
+        println("$playerName played $selectedCard for ${scoreSummary.score()} points! (Total: $totalScore)")
+        scoreSummary.ruleSummaries().forEach {
+            if (it.scoringCombinations().isNotEmpty()) {
+                val ruleType = it.ruleType()
+                it.scoringCombinations().forEach {
+                        c -> println("$ruleType of $c")
+                }
+            }
+        }
         readln()
     }
 
-    override fun displayHandPoints(playerName: String, pointsScored: Int, totalScore: Int, isCrib: Boolean) {
+    override fun displayHandPoints(playerName: String, scoreSummary: ScoreSummary, totalScore: Int, isCrib: Boolean) {
         val handName = if (isCrib) {
             "crib"
         } else {
             "hand"
         }
-        println("$playerName's $handName scored $pointsScored points! (Total: $totalScore)")
+        println("$playerName's $handName scored ${scoreSummary.score()} points! (Total: $totalScore)")
+        scoreSummary.ruleSummaries().forEach {
+            if (it.scoringCombinations().isNotEmpty()) {
+                val ruleType = it.ruleType()
+                it.scoringCombinations().forEach {
+                    c -> println("$ruleType of $c")
+                }
+            }
+        }
         readln()
     }
 

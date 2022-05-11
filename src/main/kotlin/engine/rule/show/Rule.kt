@@ -1,9 +1,13 @@
 package engine.rule.show
 
+import engine.rule.RuleSummary
+import engine.rule.RuleType
+
 interface Rule {
 
+    val ruleType: RuleType
     val points: Int
 
-    fun apply(ruleInput: RuleInput): Int
+    fun apply(ruleInput: RuleInput): RuleSummary
 
 }

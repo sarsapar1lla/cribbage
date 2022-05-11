@@ -4,8 +4,9 @@ import engine.round.Stack
 import engine.card.Card
 import engine.card.Rank
 import engine.card.Suit
+
 import kotlin.test.Test
-import kotlin.test.assertEquals
+import org.assertj.core.api.Assertions.assertThat
 
 class PairsTest {
 
@@ -14,14 +15,18 @@ class PairsTest {
 
     @Test
     fun scoresPairs() {
+        val expectedCombination = listOf(
+            listOf(Card(Suit.HEARTS, Rank.THREE), Card(Suit.CLUBS, Rank.THREE), Card(Suit.DIAMONDS, Rank.THREE))
+        )
         val stack = Stack(
             mutableListOf(
                 Card(Suit.HEARTS, Rank.THREE),
                 Card(Suit.CLUBS, Rank.THREE)
             )
         )
-        val pairs = Pairs().apply(ruleInput(stack))
-        assertEquals(6, pairs)
+        val summary = Pairs().apply(ruleInput(stack))
+        assertThat(summary.scoringCombinations()).isEqualTo(expectedCombination)
+        assertThat(summary.points()).isEqualTo(6)
     }
 
     @Test
@@ -32,8 +37,9 @@ class PairsTest {
                 Card(Suit.CLUBS, Rank.FOUR)
             )
         )
-        val pairs = Pairs().apply(ruleInput(stack))
-        assertEquals(0, pairs)
+        val summary = Pairs().apply(ruleInput(stack))
+        assertThat(summary.scoringCombinations()).isEmpty()
+        assertThat(summary.points()).isZero
     }
 
 }

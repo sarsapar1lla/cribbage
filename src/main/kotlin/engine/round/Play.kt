@@ -11,24 +11,24 @@ class Play(private val rulesEngine: RulesEngine, private val ui: UserInterface) 
     private val cardsPlayed = mutableSetOf<Card>()
     private val lastCardPoints = 1
 
-    internal fun getCardsPlayed(): Set<Card> { return cardsPlayed }
+    internal fun cardsPlayed(): Set<Card> { return cardsPlayed }
 
     private fun noPlayerCanGo(players: List<Player>, stack: Stack): Boolean {
-        return players.none { p -> p.canGo(cardsPlayed, stack.count(), stack.getMaxCount()) }
+        return players.none { p -> p.canGo(cardsPlayed, stack.count(), stack.maxCount()) }
     }
 
     private fun allCardsPlayed(playing: Player, waiting: Player): Boolean {
-        return cardsPlayed == playing.getHand().getCards() + waiting.getHand().getCards()
+        return cardsPlayed == playing.hand().getCards() + waiting.hand().getCards()
     }
 
     internal fun playCard(player: Player, stack: Stack) {
-        ui.displayStack(stack.getCardStrings(), stack.count())
-        val selectedCard = player.playCard(cardsPlayed, stack.count(), stack.getMaxCount())
+        ui.displayStack(stack.cardsAsStrings(), stack.count())
+        val selectedCard = player.playCard(cardsPlayed, stack.count(), stack.maxCount())
         val ruleInput = RuleInput(stack, selectedCard)
-        val points = rulesEngine.score(ruleInput)
+        val summary = rulesEngine.score(ruleInput)
 
-        player.addPoints(points)
-        ui.displayPlayPoints(selectedCard.toString(), player.getPlayerName(), points, player.getScore())
+        player.addPoints(summary.score())
+        ui.displayPlayPoints(selectedCard.toString(), player.playerName(), summary, player.score())
 
         stack.addCard(selectedCard)
         cardsPlayed.add(selectedCard)
@@ -48,8 +48,8 @@ class Play(private val rulesEngine: RulesEngine, private val ui: UserInterface) 
         if (noPlayerCanGo(listOf(playing, waiting), stack)) {
             if (playedLastCard != null && !stack.isFull()) {
                 playedLastCard.addPoints(lastCardPoints)
-                ui.displayMessage("${playedLastCard.getPlayerName()} scored $lastCardPoints " +
-                        "for playing the last card! (Total: ${playedLastCard.getScore()})"
+                ui.displayMessage("${playedLastCard.playerName()} scored $lastCardPoints " +
+                        "for playing the last card! (Total: ${playedLastCard.score()})"
                 )
             }
             if (allCardsPlayed(playing, waiting)) {
@@ -64,12 +64,12 @@ class Play(private val rulesEngine: RulesEngine, private val ui: UserInterface) 
             startNewStack(playing, waiting, playedLastCard!!)
             return
         }
-        if (playing.canGo(cardsPlayed, stack.count(), stack.getMaxCount())) {
+        if (playing.canGo(cardsPlayed, stack.count(), stack.maxCount())) {
             playCard(playing, stack)
             run(waiting, playing, playing, stack)
             return
         } else {
-            ui.displayMessage("${playing.getPlayerName()} cannot go!")
+            ui.displayMessage("${playing.playerName()} cannot go!")
             playCard(waiting, stack)
             run(playing, waiting, waiting, stack)
             return

@@ -1,5 +1,7 @@
 package engine.rule.show
 
+import engine.rule.ScoreSummary
+
 class RulesEngine {
 
     private val rules: List<Rule> = listOf(
@@ -10,8 +12,8 @@ class RulesEngine {
         Nobs()
     )
 
-    fun score(ruleInput: RuleInput): Int {
-        return rules.sumOf { r -> r.apply(ruleInput) }
+    fun score(ruleInput: RuleInput): ScoreSummary {
+        return ScoreSummary(rules.map { it.apply(ruleInput) })
     }
 
 }

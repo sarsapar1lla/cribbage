@@ -1,23 +1,22 @@
 package engine.card
 
 import kotlin.test.Test
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
+import org.assertj.core.api.Assertions.assertThat
 
-class CardTest {
+internal class CardTest {
 
     private val card = Card(Suit.CLUBS, Rank.EIGHT)
 
     @Test
     fun checksIfPlayable() {
         val isPlayable = card.isPlayable(0, 31)
-        assertTrue(isPlayable)
+        assertThat(isPlayable).isTrue
     }
 
     @Test
     fun checksIfNotPlayable() {
         val isPlayable = card.isPlayable(30, 31)
-        assertFalse(isPlayable)
+        assertThat(isPlayable).isFalse
     }
 
 }
