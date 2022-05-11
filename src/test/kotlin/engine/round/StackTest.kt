@@ -32,7 +32,7 @@ internal class StackTest {
     fun addsCard() {
         val card = Card(Suit.SPADES, Rank.ACE)
         stack.addCard(card)
-        assertThat(stack.getCards())
+        assertThat(stack.cards())
             .hasSize(4)
             .contains(card)
     }

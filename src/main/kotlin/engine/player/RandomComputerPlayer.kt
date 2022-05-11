@@ -11,7 +11,7 @@ class RandomComputerPlayer(playerName: String) : Player(playerName) {
     }
 
     override fun playCard(cardsPlayed: Set<Card>, stackCount: Int, maxCount: Int): Card {
-        val cards = getPlayableCards(cardsPlayed, stackCount, maxCount)
+        val cards = playableCards(cardsPlayed, stackCount, maxCount)
         return cards.random()  // chooses a random playable card
     }
 

@@ -13,7 +13,7 @@ class Heels : Rule {
     override val points: Int = 2
 
     override fun apply(starterCard: Card): RuleSummary {
-        if (starterCard.getRank() == Rank.JACK) {
+        if (starterCard.rank() == Rank.JACK) {
             return RuleSummary(ruleType, points, listOf(starterCard))
         }
         return emptyRuleSummary(ruleType)

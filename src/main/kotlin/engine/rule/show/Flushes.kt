@@ -14,11 +14,11 @@ class Flushes : Rule {
     private val fiveCardFlushPoints = 5
 
     override fun apply(ruleInput: RuleInput): RuleSummary {
-        val uniqueSuits = ruleInput.getHand().getCards().map { c -> c.getSuit() }.distinct()
+        val uniqueSuits = ruleInput.getHand().getCards().map { c -> c.suit() }.distinct()
         if (uniqueSuits.size > 1) {
             return emptyRuleSummary(ruleType)
         }
-        val starterHasSameSuit = uniqueSuits.contains(ruleInput.getStarterCard().getSuit())
+        val starterHasSameSuit = uniqueSuits.contains(ruleInput.getStarterCard().suit())
         if (starterHasSameSuit) {
             return RuleSummary(
                 ruleType,

@@ -10,27 +10,27 @@ abstract class Player(private val playerName: String) {
 
     protected val hand: Hand = Hand()
 
-    fun getScore(): Int { return score }
+    fun score(): Int { return score }
 
     fun addPoints(points: Int) {
         val newScore = score + points
         score = min(newScore, 121)
     }
 
-    fun getPlayerName(): String { return playerName }
+    fun playerName(): String { return playerName }
 
     @JvmName("getPlayerHand")
-    fun getHand(): Hand { return hand }
+    fun hand(): Hand { return hand }
 
     fun giveCards(cards: Set<Card>) {
         hand.replaceCards(cards)
     }
 
     fun canGo(cardsPlayed: Set<Card>, stackCount: Int, maxCount: Int): Boolean {
-        return getPlayableCards(cardsPlayed, stackCount, maxCount).isNotEmpty()
+        return playableCards(cardsPlayed, stackCount, maxCount).isNotEmpty()
     }
 
-    protected fun getPlayableCards(cardsPlayed: Set<Card>, stackCount: Int, maxCount: Int): List<Card> {
+    protected fun playableCards(cardsPlayed: Set<Card>, stackCount: Int, maxCount: Int): List<Card> {
         return hand.getSortedCards().filter { c -> c !in cardsPlayed && c.isPlayable(stackCount, maxCount)}
     }
 

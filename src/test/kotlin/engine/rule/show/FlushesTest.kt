@@ -34,8 +34,8 @@ internal class FlushesTest {
         )
         val ruleInput = ruleInput(Card(Suit.CLUBS, Rank.THREE))
         val summary = Flushes().apply(ruleInput)
-        assertThat(summary.getScoringCombinations()).isEqualTo(expectedFlush)
-        assertThat(summary.getPoints()).isEqualTo(4)
+        assertThat(summary.scoringCombinations()).isEqualTo(expectedFlush)
+        assertThat(summary.points()).isEqualTo(4)
     }
 
     @Test
@@ -51,8 +51,8 @@ internal class FlushesTest {
         )
         val ruleInput = ruleInput(Card(Suit.DIAMONDS, Rank.THREE))
         val summary = Flushes().apply(ruleInput)
-        assertThat(summary.getScoringCombinations()).isEqualTo(expectedFlush)
-        assertThat(summary.getPoints()).isEqualTo(5)
+        assertThat(summary.scoringCombinations()).isEqualTo(expectedFlush)
+        assertThat(summary.points()).isEqualTo(5)
     }
 
     @Test
@@ -68,16 +68,16 @@ internal class FlushesTest {
         )
         val ruleInput = ruleInput(Card(Suit.DIAMONDS, Rank.THREE))
         val summary = Flushes().apply(ruleInput)
-        assertThat(summary.getScoringCombinations()).isEqualTo(expectedFlush)
-        assertThat(summary.getPoints()).isEqualTo(5)
+        assertThat(summary.scoringCombinations()).isEqualTo(expectedFlush)
+        assertThat(summary.points()).isEqualTo(5)
     }
 
     @Test
     fun doesNotCountFourCardFlushWhenCrib() {
         val ruleInput = ruleInput(Card(Suit.HEARTS, Rank.THREE), true)
         val summary = Flushes().apply(ruleInput)
-        assertThat(summary.getScoringCombinations()).isEmpty()
-        assertThat(summary.getPoints()).isZero
+        assertThat(summary.scoringCombinations()).isEmpty()
+        assertThat(summary.points()).isZero
     }
 
 }

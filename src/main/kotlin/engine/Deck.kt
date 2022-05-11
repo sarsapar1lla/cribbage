@@ -29,16 +29,16 @@ class Deck(shuffled: Boolean = true) {
     }
 
     fun dealOne(): Card {
-        val card = getRemainingCards().first()
+        val card = remainingCards().first()
         dealtCards.add(card)
         return card
     }
 
-    fun getRemainingCards(): List<Card> {
+    fun remainingCards(): List<Card> {
         return cards.filterNot { c -> c in dealtCards }
     }
 
-    fun getDealtCards(): List<Card> {
+    fun dealtCards(): List<Card> {
         return dealtCards
     }
 

@@ -20,7 +20,7 @@ class CountReached(private val desiredCount: DesiredCount) : Rule {
     override fun apply(ruleInput: RuleInput): RuleSummary {
         val isDesiredCount = ruleInput.getRunningTotal() == desiredCount.getCount()
         return if (isDesiredCount) {
-            RuleSummary(ruleType, points, ruleInput.getStack().getCards() + ruleInput.getCard())
+            RuleSummary(ruleType, points, ruleInput.getStack().cards() + ruleInput.getCard())
         } else {
             emptyRuleSummary(ruleType)
         }

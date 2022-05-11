@@ -2,15 +2,11 @@ package engine.card
 
 data class Card(private val suit: Suit, private val rank: Rank) {
 
-    fun getSuit(): Suit {
-        return suit;
-    }
+    fun suit(): Suit { return suit }
 
-    fun getRank(): Rank {
-        return rank;
-    }
+    fun rank(): Rank { return rank }
 
-    fun getCardValue(): Int {
+    fun cardValue(): Int {
         return rank.cardValue
     }
 

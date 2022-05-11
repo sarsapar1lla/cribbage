@@ -29,10 +29,10 @@ internal class PlayTest {
             )
         )
         play.playCard(player, stack)
-        assertThat(player.getScore()).isEqualTo(2)
+        assertThat(player.score()).isEqualTo(2)
         assertThat(cards.first())
-            .isIn(stack.getCards())
-            .isIn(play.getCardsPlayed())
+            .isIn(stack.cards())
+            .isIn(play.cardsPlayed())
     }
 
     @Test
@@ -55,8 +55,8 @@ internal class PlayTest {
 
         play.run(player1, player2)
 
-        assertThat(player1.getScore()).isEqualTo(11)
-        assertThat(player2.getScore()).isEqualTo(4)
+        assertThat(player1.score()).isEqualTo(11)
+        assertThat(player2.score()).isEqualTo(4)
 
     }
 
@@ -82,8 +82,8 @@ internal class PlayTest {
 
         play.run(player1, player2)
 
-        assertThat(player1.getScore()).isEqualTo(3)
-        assertThat(player2.getScore()).isEqualTo(2)
+        assertThat(player1.score()).isEqualTo(3)
+        assertThat(player2.score()).isEqualTo(2)
 
     }
 
@@ -110,8 +110,8 @@ internal class PlayTest {
 
         play.run(player1, player2)
 
-        assertThat(player1.getScore()).isEqualTo(3)
-        assertThat(player2.getScore()).isEqualTo(3)
+        assertThat(player1.score()).isEqualTo(3)
+        assertThat(player2.score()).isEqualTo(3)
     }
 
 }

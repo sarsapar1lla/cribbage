@@ -15,8 +15,8 @@ class Runs : Rule {
         if (stack.size < n - 1) {
             return emptyList()
         }
-        val subset = (stack.takeLast(n - 1) + card).sortedBy { c -> c.getRank() }
-        val groups = subset.mapIndexed { index, c -> c.getRank().ordinal - index }.distinct().count()
+        val subset = (stack.takeLast(n - 1) + card).sortedBy { c -> c.rank() }
+        val groups = subset.mapIndexed { index, c -> c.rank().ordinal - index }.distinct().count()
         if (groups == 1) {
             return subset
         }
@@ -24,13 +24,13 @@ class Runs : Rule {
     }
 
     override fun apply(ruleInput: RuleInput): RuleSummary {
-        val stackSize = ruleInput.getStack().getCards().size
+        val stackSize = ruleInput.getStack().cards().size
         if (stackSize < 2) {
             return emptyRuleSummary(ruleType)  // can't have a run of less than three
         }
         var longestRun = emptyList<Card>()
         for (runLength in 3..stackSize + 1) {
-            val run = findRun(ruleInput.getStack().getCards(), ruleInput.getCard(), runLength)
+            val run = findRun(ruleInput.getStack().cards(), ruleInput.getCard(), runLength)
             if (run.size > longestRun.size) {
                 longestRun = run
             }

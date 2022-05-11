@@ -25,8 +25,8 @@ class PairsTest {
             )
         )
         val summary = Pairs().apply(ruleInput(stack))
-        assertThat(summary.getScoringCombinations()).isEqualTo(expectedCombination)
-        assertThat(summary.getPoints()).isEqualTo(6)
+        assertThat(summary.scoringCombinations()).isEqualTo(expectedCombination)
+        assertThat(summary.points()).isEqualTo(6)
     }
 
     @Test
@@ -38,8 +38,8 @@ class PairsTest {
             )
         )
         val summary = Pairs().apply(ruleInput(stack))
-        assertThat(summary.getScoringCombinations()).isEmpty()
-        assertThat(summary.getPoints()).isZero
+        assertThat(summary.scoringCombinations()).isEmpty()
+        assertThat(summary.points()).isZero
     }
 
 }

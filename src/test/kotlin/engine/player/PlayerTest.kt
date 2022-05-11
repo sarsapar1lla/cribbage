@@ -15,13 +15,13 @@ internal class PlayerTest {
     @Test
     fun addsPoints() {
         player.addPoints(5)
-        assertThat(player.getScore()).isEqualTo(5)
+        assertThat(player.score()).isEqualTo(5)
     }
 
     @Test
     fun capsScoreAt121() {
         player.addPoints(122)
-        assertThat(player.getScore()).isEqualTo(121)
+        assertThat(player.score()).isEqualTo(121)
     }
 
     @Test

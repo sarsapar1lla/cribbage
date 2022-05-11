@@ -25,8 +25,8 @@ class RunsTest {
             )
         )
         val summary = Runs().apply(ruleInput(stack))
-        assertThat(summary.getScoringCombinations()).isEqualTo(expectedCombination)
-        assertThat(summary.getPoints()).isEqualTo(3)
+        assertThat(summary.scoringCombinations()).isEqualTo(expectedCombination)
+        assertThat(summary.points()).isEqualTo(3)
     }
 
     @Test
@@ -41,8 +41,8 @@ class RunsTest {
             )
         )
         val summary = Runs().apply(ruleInput(stack))
-        assertThat(summary.getScoringCombinations()).isEqualTo(expectedCombination)
-        assertThat(summary.getPoints()).isEqualTo(3)
+        assertThat(summary.scoringCombinations()).isEqualTo(expectedCombination)
+        assertThat(summary.points()).isEqualTo(3)
     }
 
     @Test
@@ -65,8 +65,8 @@ class RunsTest {
             )
         )
         val summary = Runs().apply(ruleInput(stack))
-        assertThat(summary.getScoringCombinations()).isEqualTo(expectedCombination)
-        assertThat(summary.getPoints()).isEqualTo(5)
+        assertThat(summary.scoringCombinations()).isEqualTo(expectedCombination)
+        assertThat(summary.points()).isEqualTo(5)
     }
 
     @Test
@@ -79,8 +79,8 @@ class RunsTest {
             )
         )
         val summary = Runs().apply(ruleInput(stack))
-        assertThat(summary.getScoringCombinations()).isEmpty()
-        assertThat(summary.getPoints()).isZero
+        assertThat(summary.scoringCombinations()).isEmpty()
+        assertThat(summary.points()).isZero
     }
 
 }

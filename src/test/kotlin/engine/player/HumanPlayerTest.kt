@@ -28,7 +28,7 @@ internal class HumanPlayerTest {
             .isEqualTo(setOf(Card(Suit.HEARTS, Rank.ACE), Card(Suit.CLUBS, Rank.EIGHT)))
         assertThat(discarded)
             .describedAs("Discards are no longer in player's hand")
-            .noneMatch { c -> player.getHand().getCards().contains(c) }
+            .noneMatch { c -> player.hand().getCards().contains(c) }
     }
 
     @Test
@@ -38,7 +38,7 @@ internal class HumanPlayerTest {
         assertThat(selectedCard).isEqualTo(Card(Suit.HEARTS, Rank.ACE))
         assertThat(selectedCard)
             .describedAs("Selected card is still in player's hand")
-            .isIn(player.getHand().getCards())
+            .isIn(player.hand().getCards())
     }
 
 }

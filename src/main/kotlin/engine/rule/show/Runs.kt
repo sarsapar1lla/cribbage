@@ -16,9 +16,9 @@ class Runs : Rule {
         val possibleRuns = ruleInput.getUniqueCombinations().filter { combination -> combination.size >= 3 }
         for (possibleRun in possibleRuns.sortedByDescending { r -> r.size }) {
             val groups = possibleRun.sortedBy {
-                    card -> card.getRank()
+                    card -> card.rank()
             }.mapIndexed {
-                    index, card -> card.getRank().ordinal - index
+                    index, card -> card.rank().ordinal - index
             }.distinct().count()
             if (groups == 1) {
                 runs.add(possibleRun)

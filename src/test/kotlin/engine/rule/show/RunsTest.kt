@@ -31,8 +31,8 @@ internal class RunsTest {
         val starterCard = Card(Suit.CLUBS, Rank.TWO)
         val ruleInput = RuleInput(hand, starterCard)
         val summary = Runs().apply(ruleInput)
-        assertThat(summary.getScoringCombinations()).isEqualTo(expectedRuns)
-        assertThat(summary.getPoints()).isEqualTo(4)
+        assertThat(summary.scoringCombinations()).isEqualTo(expectedRuns)
+        assertThat(summary.points()).isEqualTo(4)
     }
 
     @Test
@@ -54,8 +54,8 @@ internal class RunsTest {
         val starterCard = Card(Suit.DIAMONDS, Rank.NINE)
         val ruleInput = RuleInput(hand, starterCard)
         val summary = Runs().apply(ruleInput)
-        assertThat(summary.getScoringCombinations()).isEqualTo(expectedRuns)
-        assertThat(summary.getPoints()).isEqualTo(8)
+        assertThat(summary.scoringCombinations()).isEqualTo(expectedRuns)
+        assertThat(summary.points()).isEqualTo(8)
     }
 
 }

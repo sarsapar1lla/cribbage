@@ -23,21 +23,21 @@ class RulesEngineTest {
     fun calculatesCorrectScorePair() {
         val card = Card(Suit.CLUBS, Rank.THREE)
         val summary = RulesEngine().score(ruleInput(card))
-        assertThat(summary.getScore()).isEqualTo(2)
+        assertThat(summary.score()).isEqualTo(2)
     }
 
     @Test
     fun calculatesCorrectScoreRun() {
         val card = Card(Suit.CLUBS, Rank.TWO)
         val summary = RulesEngine().score(ruleInput(card))
-        assertThat(summary.getScore()).isEqualTo(4)
+        assertThat(summary.score()).isEqualTo(4)
     }
 
     @Test
     fun calculatesCorrectScoreFifteen() {
         val card = Card(Suit.CLUBS, Rank.SEVEN)
         val summary = RulesEngine().score(ruleInput(card))
-        assertThat(summary.getScore()).isEqualTo(2)
+        assertThat(summary.score()).isEqualTo(2)
     }
 
     @Test
@@ -52,7 +52,7 @@ class RulesEngineTest {
         val card = Card(Suit.CLUBS, Rank.FOUR)
         val ruleInput = RuleInput(stack, card)
         val summary = RulesEngine().score(ruleInput)
-        assertThat(summary.getScore()).isEqualTo(2)
+        assertThat(summary.score()).isEqualTo(2)
     }
 
 }

@@ -29,8 +29,8 @@ internal class PairsTest {
             listOf(Card(Suit.CLUBS, Rank.KING), Card(Suit.DIAMONDS, Rank.KING))
         )
         val summary = Pairs().apply(ruleInput)
-        assertThat(summary.getScoringCombinations()).hasSameElementsAs(expectedPairs)
-        assertThat(summary.getPoints()).isEqualTo(8)
+        assertThat(summary.scoringCombinations()).hasSameElementsAs(expectedPairs)
+        assertThat(summary.points()).isEqualTo(8)
     }
 
 }

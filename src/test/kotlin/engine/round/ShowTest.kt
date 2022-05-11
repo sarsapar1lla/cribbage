@@ -50,8 +50,8 @@ internal class ShowTest {
 
         show.run(player1, player2, crib, startedCard)
 
-        assertThat(player1.getScore()).isEqualTo(8)
-        assertThat(player2.getScore()).isEqualTo(4)
+        assertThat(player1.score()).isEqualTo(8)
+        assertThat(player2.score()).isEqualTo(4)
 
     }
 

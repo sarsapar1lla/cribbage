@@ -14,7 +14,7 @@ class HumanPlayer(playerName: String, private val ui: UserInterface) : Player(pl
     }
 
     override fun playCard(cardsPlayed: Set<Card>, stackCount: Int, maxCount: Int): Card {
-        val cards = getPlayableCards(cardsPlayed, stackCount, maxCount)
+        val cards = playableCards(cardsPlayed, stackCount, maxCount)
         val chosenCardIndex = ui.promptPlayerToPlayCard(cards.map { c -> c.toString() })
         return cards[chosenCardIndex - 1]
     }

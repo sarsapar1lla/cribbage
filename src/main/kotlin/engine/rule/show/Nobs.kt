@@ -13,8 +13,8 @@ class Nobs : Rule {
     override val points = 1
 
     override fun apply(ruleInput: RuleInput): RuleSummary {
-        val starterCardSuit = ruleInput.getStarterCard().getSuit()
-        val nobsFilter = { c: Card -> c.getSuit() == starterCardSuit && c.getRank() == Rank.JACK}
+        val starterCardSuit = ruleInput.getStarterCard().suit()
+        val nobsFilter = { c: Card -> c.suit() == starterCardSuit && c.rank() == Rank.JACK}
         val hasNobs = ruleInput.getHand().getCards().any { c -> nobsFilter(c) }
         return if (hasNobs) {
             val scoringCombination = setOf(

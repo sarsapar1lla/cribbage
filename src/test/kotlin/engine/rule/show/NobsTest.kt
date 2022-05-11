@@ -26,15 +26,15 @@ internal class NobsTest {
     fun countsNobs() {
         val expectedCombinations = listOf(listOf(Card(Suit.DIAMONDS, Rank.JACK), Card(Suit.DIAMONDS, Rank.KING)))
         val summary = Nobs().apply(ruleInput(Card(Suit.DIAMONDS, Rank.KING)))
-        assertThat(summary.getScoringCombinations()).isEqualTo(expectedCombinations)
-        assertThat(summary.getPoints()).isEqualTo(1)
+        assertThat(summary.scoringCombinations()).isEqualTo(expectedCombinations)
+        assertThat(summary.points()).isEqualTo(1)
     }
 
     @Test
     fun countsNotNobs() {
         val summary = Nobs().apply(ruleInput(Card(Suit.CLUBS, Rank.KING)))
-        assertThat(summary.getScoringCombinations()).isEmpty()
-        assertThat(summary.getPoints()).isZero
+        assertThat(summary.scoringCombinations()).isEmpty()
+        assertThat(summary.points()).isZero
     }
 
 }

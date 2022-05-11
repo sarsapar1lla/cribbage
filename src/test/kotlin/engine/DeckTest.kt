@@ -9,12 +9,12 @@ internal class DeckTest {
 
     @Test
     fun has52Cards() {
-        assertThat(deck.getRemainingCards()).hasSize(52)
+        assertThat(deck.remainingCards()).hasSize(52)
     }
 
     @Test
     fun allCardsAreUnique() {
-        assertThat(deck.getRemainingCards().distinct()).hasSize(52)
+        assertThat(deck.remainingCards().distinct()).hasSize(52)
     }
 
     @Test
@@ -28,15 +28,15 @@ internal class DeckTest {
     fun dealtCardsMatch() {
         val (cutterCards, dealerCards) = deck.deal()
         val cards = cutterCards + dealerCards
-        assertThat(deck.getDealtCards().toSet()).isEqualTo(cards)
+        assertThat(deck.dealtCards().toSet()).isEqualTo(cards)
     }
 
     @Test
     fun remainingCardsAreCorrect() {
         val (cutterCards, dealerCards) = deck.deal()
         val cards = cutterCards + dealerCards
-        assertThat(deck.getRemainingCards()).hasSize(40)
-        assertThat(cards).noneMatch { c -> deck.getRemainingCards().contains(c) }
+        assertThat(deck.remainingCards()).hasSize(40)
+        assertThat(cards).noneMatch { c -> deck.remainingCards().contains(c) }
     }
 
 }

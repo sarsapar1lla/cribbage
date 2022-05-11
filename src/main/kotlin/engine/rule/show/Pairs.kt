@@ -14,7 +14,7 @@ class Pairs : Rule {
         val pairs = mutableSetOf<Set<Card>>()
         val uniquePairs = ruleInput.getUniqueCombinations().filter { c -> c.size == 2 }
         for (pair in uniquePairs) {
-            val pairRanks = pair.map { c -> c.getRank() }
+            val pairRanks = pair.map { c -> c.rank() }
             if (pairRanks.distinct().count() == 1) {
                 pairs.add(pair)
             }

@@ -23,7 +23,7 @@ internal class RulesEngineTest {
         val starterCard = Card(Suit.DIAMONDS, Rank.FIVE)
         val ruleInput = RuleInput(hand, starterCard)
         val summary = RulesEngine().score(ruleInput)
-        assertThat(summary.getScore()).isEqualTo(12)
+        assertThat(summary.score()).isEqualTo(12)
     }
 
 }

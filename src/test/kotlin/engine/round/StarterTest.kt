@@ -24,7 +24,7 @@ internal class StarterTest {
 
         starter.run(starterCard, dealer)
 
-        assertThat(dealer.getScore()).isZero
+        assertThat(dealer.score()).isZero
     }
 
     @Test
@@ -34,7 +34,7 @@ internal class StarterTest {
 
         starter.run(starterCard, dealer)
 
-        assertThat(dealer.getScore()).isEqualTo(2)
+        assertThat(dealer.score()).isEqualTo(2)
         assertThat(ui.messages).contains("Predictable scored 2 points for drawing a Jack!")
     }
 

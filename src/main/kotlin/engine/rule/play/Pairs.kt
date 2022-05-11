@@ -18,7 +18,7 @@ class Pairs : Rule {
     }
 
     override fun apply(ruleInput: RuleInput): RuleSummary {
-        val pairs = ruleInput.getStack().getCards().takeLastWhile { it.getRank() == ruleInput.getCard().getRank() }
+        val pairs = ruleInput.getStack().cards().takeLastWhile { it.rank() == ruleInput.getCard().rank() }
         if (pairs.isEmpty()) {
             return emptyRuleSummary(ruleType)
         }

@@ -6,9 +6,9 @@ class Stack(private val cards: MutableList<Card> = mutableListOf()) {
 
     private val maxCount = 31
 
-    fun getMaxCount(): Int { return maxCount }
+    fun maxCount(): Int { return maxCount }
 
-    fun count(): Int { return cards.sumOf { c -> c.getCardValue() } }
+    fun count(): Int { return cards.sumOf { c -> c.cardValue() } }
 
     fun isFull(): Boolean { return count() == maxCount }
 
@@ -16,9 +16,9 @@ class Stack(private val cards: MutableList<Card> = mutableListOf()) {
         cards.add(card)
     }
 
-    fun getCards(): List<Card> { return cards }
+    fun cards(): List<Card> { return cards }
 
-    fun getCardStrings(): List<String> {
+    fun cardsAsStrings(): List<String> {
         return cards.map { c -> c.toString() }
     }
 

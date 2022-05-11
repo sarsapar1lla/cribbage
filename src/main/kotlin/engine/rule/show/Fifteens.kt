@@ -10,7 +10,7 @@ class Fifteens : Rule {
     override val points = 2
 
     override fun apply(ruleInput: RuleInput): RuleSummary {
-        val fifteens = ruleInput.getUniqueCombinations().filter { it.sumOf { c -> c.getCardValue() } == 15 }.toSet()
+        val fifteens = ruleInput.getUniqueCombinations().filter { it.sumOf { c -> c.cardValue() } == 15 }.toSet()
         return RuleSummary(ruleType, fifteens.size * points, fifteens)
     }
 }

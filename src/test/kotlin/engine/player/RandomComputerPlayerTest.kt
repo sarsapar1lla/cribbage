@@ -23,14 +23,14 @@ internal class RandomComputerPlayerTest {
         val discarded = player.discard()
         assertThat(discarded)
             .hasSize(2)
-            .noneMatch { c -> player.getHand().getCards().contains(c) }
+            .noneMatch { c -> player.hand().getCards().contains(c) }
     }
 
     @Test
     fun selectsACard() {
         player.giveCards(cards)
         val selectedCard = player.playCard(emptySet(), 0, 31)
-        assertThat(selectedCard).isIn(player.getHand().getCards())
+        assertThat(selectedCard).isIn(player.hand().getCards())
     }
 
 }

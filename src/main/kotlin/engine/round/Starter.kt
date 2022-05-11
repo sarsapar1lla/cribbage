@@ -9,10 +9,10 @@ class Starter(private val rulesEngine: RulesEngine, private val ui: UserInterfac
 
     fun run(starterCard: Card, dealer: Player) {
         val summary = rulesEngine.score(starterCard)
-        val points = summary.getScore()
+        val points = summary.score()
         dealer.addPoints(points)
         if (points > 0) {
-            ui.displayMessage("${dealer.getPlayerName()} scored $points points for drawing a Jack!")
+            ui.displayMessage("${dealer.playerName()} scored $points points for drawing a Jack!")
         }
     }
 

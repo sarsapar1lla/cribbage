@@ -2,11 +2,11 @@ package engine.rule
 
 class ScoreSummary(ruleSummaries: List<RuleSummary>) {
 
-    private val sortedSummaries = ruleSummaries.sortedBy { s -> s.getRuleType() }
-    private val score: Int = ruleSummaries.sumOf { r -> r.getPoints()}
+    private val sortedSummaries = ruleSummaries.sortedBy { s -> s.ruleType() }
+    private val score: Int = ruleSummaries.sumOf { r -> r.points()}
 
-    fun getSortedSummaries(): List<RuleSummary> { return sortedSummaries }
+    fun ruleSummaries(): List<RuleSummary> { return sortedSummaries }
 
-    fun getScore(): Int { return score }
+    fun score(): Int { return score }
 
 }
