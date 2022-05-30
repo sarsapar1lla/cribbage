@@ -2,6 +2,7 @@ package engine
 
 import engine.player.HumanPlayer
 import engine.player.RandomComputerPlayer
+import engine.player.PlayerHasWonException
 import engine.round.Round
 import engine.rule.RulesEngine
 import engine.ui.Terminal
@@ -15,8 +16,16 @@ class Game {
     private val computer = RandomComputerPlayer("HAL")
 
     fun play() {
-        val round = Round(rulesEngine, terminal)
-        round.play(computer, player)
+        while (true) {
+            val round = Round(rulesEngine, terminal)
+            try {
+                round.play(computer, player)
+            } catch (playerHasWon: PlayerHasWonException) {
+                terminal.displayMessage(playerHasWon.message!!)
+                break
+            }
+        }
+        terminal.displayMessage("Thanks for playing!")
     }
 
 }

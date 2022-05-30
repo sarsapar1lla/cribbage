@@ -4,6 +4,8 @@ import engine.Hand
 import engine.card.Card
 import kotlin.math.min
 
+const val MAX_POSSIBLE_SCORE = 121
+
 abstract class Player(private val playerName: String) {
 
     private var score = 0
@@ -14,7 +16,11 @@ abstract class Player(private val playerName: String) {
 
     fun addPoints(points: Int) {
         val newScore = score + points
-        score = min(newScore, 121)
+        score = min(newScore, MAX_POSSIBLE_SCORE)
+
+        if (score == MAX_POSSIBLE_SCORE) {
+            throw PlayerHasWonException("$playerName has won!")
+        }
     }
 
     fun playerName(): String { return playerName }

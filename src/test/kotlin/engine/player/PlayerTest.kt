@@ -7,6 +7,7 @@ import engine.ui.MockUI
 
 import kotlin.test.Test
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 
 internal class PlayerTest {
 
@@ -19,9 +20,8 @@ internal class PlayerTest {
     }
 
     @Test
-    fun capsScoreAt121() {
-        player.addPoints(122)
-        assertThat(player.score()).isEqualTo(121)
+    fun throwsErrorWhenPlayerHasWon() {
+        assertThatThrownBy { player.addPoints(121) }.isInstanceOf(PlayerHasWonException::class.java)
     }
 
     @Test
