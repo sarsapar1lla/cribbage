@@ -4,6 +4,7 @@ import engine.Deck
 import engine.Hand
 import engine.card.Card
 import engine.player.Player
+import engine.player.Players
 import engine.rule.RulesEngine
 import engine.ui.UserInterface
 import kotlinx.coroutines.async
@@ -26,24 +27,24 @@ class Round(rulesEngine: RulesEngine, private val ui: UserInterface, private val
         return deck.dealOne()
     }
 
-    fun play(dealer: Player, cutter: Player) {
+    fun play(players: Players) {
         val (cutterCards, dealerCards) = deck.deal()
-        dealer.giveCards(dealerCards)
-        cutter.giveCards(cutterCards)
+        players.dealer.giveCards(dealerCards)
+        players.cutter.giveCards(cutterCards)
 
-        ui.displayMessage("${dealer.playerName()} is the dealer this round")
+        ui.displayMessage("${players.dealer.playerName()} is the dealer this round")
 
         // Running discard methods for both players simultaneously to save time
         val crib = runBlocking {
-            val cribCards = promptPlayersToDiscard(dealer, cutter)
+            val cribCards = promptPlayersToDiscard(players.dealer, players.cutter)
             Hand(cribCards.toMutableSet())
         }
 
         val starterCard = dealStarterCard(deck)
-        ui.displayMessage("${dealer.playerName()} drew $starterCard as the starterCard!")
-        starter.run(starterCard, dealer)
-        play.run(dealer, cutter)
-        show.run(dealer, cutter, crib, starterCard)
+        ui.displayMessage("${players.dealer.playerName()} drew $starterCard as the starterCard!")
+        starter.run(starterCard, players.dealer)
+        play.run(players.dealer, players.cutter)
+        show.run(players.dealer, players.cutter, crib, starterCard)
 
     }
 
