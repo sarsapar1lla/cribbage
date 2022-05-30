@@ -22,7 +22,6 @@ class Game {
         return Players(players.cutter, players.dealer)
     }
 
-
     fun play() {
         var players = if (playerDealsFirst()) Players(player, computer) else Players(computer, player)
 
