@@ -28,14 +28,15 @@ fun thirtyOne(ruleInput: RuleInput): RuleSummary {
     return getDesiredCountRule(31, RuleType.THIRTY_ONE)(ruleInput)
 }
 
-private fun choose(n: Int, k: Int): Int {
-    if (k == 0) {
-        return 1
-    }
-    return n * choose(n - 1, k - 1) / k
-}
-
 fun pairs(ruleInput: RuleInput): RuleSummary {
+
+    fun choose(n: Int, k: Int): Int {
+        if (k == 0) {
+            return 1
+        }
+        return n * choose(n - 1, k - 1) / k
+    }
+
     val ruleType = RuleType.PAIR
     val pairs = ruleInput.stack().cards().takeLastWhile { it.rank() == ruleInput.card().rank() }
     if (pairs.isEmpty()) {
@@ -48,19 +49,20 @@ fun pairs(ruleInput: RuleInput): RuleSummary {
     )
 }
 
-private fun findRun(stack: List<Card>, card: Card, n: Int): List<Card> {
-    if (stack.size < n - 1) {
+fun runs(ruleInput: RuleInput): RuleSummary {
+
+    fun findRun(stack: List<Card>, card: Card, n: Int): List<Card> {
+        if (stack.size < n - 1) {
+            return emptyList()
+        }
+        val subset = (stack.takeLast(n - 1) + card).sortedBy { c -> c.rank() }
+        val groups = subset.mapIndexed { index, c -> c.rank().ordinal - index }.distinct().count()
+        if (groups == 1) {
+            return subset
+        }
         return emptyList()
     }
-    val subset = (stack.takeLast(n - 1) + card).sortedBy { c -> c.rank() }
-    val groups = subset.mapIndexed { index, c -> c.rank().ordinal - index }.distinct().count()
-    if (groups == 1) {
-        return subset
-    }
-    return emptyList()
-}
 
-fun runs(ruleInput: RuleInput): RuleSummary {
     val ruleType = RuleType.RUN
     val stackSize = ruleInput.stack().cards().size
     if (stackSize < 2) {
