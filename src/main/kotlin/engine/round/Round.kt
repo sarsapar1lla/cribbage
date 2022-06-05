@@ -5,17 +5,16 @@ import engine.Hand
 import engine.card.Card
 import engine.player.Player
 import engine.player.Players
-import engine.rule.RulesEngine
 import engine.ui.UserInterface
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.coroutineScope
 
-class Round(rulesEngine: RulesEngine, private val ui: UserInterface, private val deck: Deck = Deck()) {
+class Round(private val ui: UserInterface, private val deck: Deck = Deck()) {
 
-    private val starter = Starter(rulesEngine.getStarterRulesEngine(), ui)
-    private val play = Play(rulesEngine.getPlayRulesEngine(), ui)
-    private val show = Show(rulesEngine.getShowRulesEngine(), ui)
+    private val starter = Starter(ui)
+    private val play = Play(ui)
+    private val show = Show(ui)
 
     private suspend fun promptPlayersToDiscard(dealer: Player, cutter: Player) = coroutineScope {
         val dealerDiscards = async { dealer.discard() }

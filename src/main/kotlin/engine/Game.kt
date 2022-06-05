@@ -2,13 +2,11 @@ package engine
 
 import engine.player.*
 import engine.round.Round
-import engine.rule.RulesEngine
 import engine.ui.Terminal
 import kotlin.random.Random
 
 class Game {
 
-    private val rulesEngine = RulesEngine()
     private val terminal = Terminal()
 
     private val player = HumanPlayer("Tim", terminal)
@@ -26,7 +24,7 @@ class Game {
         var players = if (playerDealsFirst()) Players(player, computer) else Players(computer, player)
 
         while (true) {
-            val round = Round(rulesEngine, terminal)
+            val round = Round(terminal)
             try {
                 round.play(players)
             } catch (playerHasWon: PlayerHasWonException) {

@@ -3,14 +3,14 @@ package engine.rule.play
 import engine.round.Stack
 import engine.card.Card
 
-class RuleInput(private val stack: Stack, private val card: Card) {
+data class RuleInput(private val stack: Stack, private val card: Card) {
 
     private val runningTotal: Int = stack.count() + card.cardValue()
 
-    fun getStack(): Stack { return stack }
+    fun stack(): Stack { return stack }
 
-    fun getCard(): Card { return card }
+    fun card(): Card { return card }
 
-    fun getRunningTotal(): Int { return runningTotal }
+    fun runningTotal(): Int { return runningTotal }
 
 }

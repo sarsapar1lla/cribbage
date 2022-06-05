@@ -27,14 +27,14 @@ internal class FifteensTest {
             listOf(Card(Suit.DIAMONDS, Rank.SEVEN), Card(Suit.HEARTS, Rank.EIGHT)),
             listOf(Card(Suit.DIAMONDS, Rank.ACE), Card(Suit.HEARTS, Rank.FOUR), Card(Suit.CLUBS, Rank.KING))
         )
-        val summary = Fifteens().apply(ruleInput)
+        val summary = fifteens(ruleInput)
         assertThat(summary.scoringCombinations()).isEqualTo(expectedFifteens)
         assertThat(summary.points()).isEqualTo(4)
     }
 
     @Test
     fun returnsCorrectCountWithJunkHand() {
-        val summary = Fifteens().apply(RuleInput(JunkHand().hand(), starterCard))
+        val summary = fifteens(RuleInput(JunkHand().hand(), starterCard))
         assertThat(summary.scoringCombinations()).isEmpty()
         assertThat(summary.points()).isZero
     }

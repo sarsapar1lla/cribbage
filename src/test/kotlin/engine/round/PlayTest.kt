@@ -4,7 +4,6 @@ import engine.card.Card
 import engine.card.Rank
 import engine.card.Suit
 import engine.player.PredictablePlayer
-import engine.rule.play.RulesEngine
 import engine.ui.MockUI
 
 import kotlin.test.Test
@@ -12,10 +11,9 @@ import org.assertj.core.api.Assertions.assertThat
 
 internal class PlayTest {
 
-    private val rulesEngine = RulesEngine()
     private val ui = MockUI()
 
-    private val play = Play(rulesEngine, ui)
+    private val play = Play(ui)
 
     @Test
     fun scoresPlayedCardCorrectly() {

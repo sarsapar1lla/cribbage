@@ -2,13 +2,13 @@ package engine.round
 
 import engine.card.Card
 import engine.player.Player
-import engine.rule.starter.RulesEngine
+import engine.rule.starter.score
 import engine.ui.UserInterface
 
-class Starter(private val rulesEngine: RulesEngine, private val ui: UserInterface) {
+class Starter(private val ui: UserInterface) {
 
     fun run(starterCard: Card, dealer: Player) {
-        val summary = rulesEngine.score(starterCard)
+        val summary = score(starterCard)
         val points = summary.score()
         dealer.addPoints(points)
         if (points > 0) {

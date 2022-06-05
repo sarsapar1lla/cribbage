@@ -2,7 +2,7 @@ package engine
 
 import engine.card.Card
 
-class Hand(private val cards: MutableSet<Card> = mutableSetOf()) {
+data class Hand(private val cards: MutableSet<Card> = mutableSetOf()) {
 
     fun removeCards(cards: Set<Card>) {
         this.cards.removeAll(cards)

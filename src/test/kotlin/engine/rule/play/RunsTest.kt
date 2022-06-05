@@ -24,7 +24,7 @@ class RunsTest {
                 Card(Suit.CLUBS, Rank.SEVEN)
             )
         )
-        val summary = Runs().apply(ruleInput(stack))
+        val summary = runs(ruleInput(stack))
         assertThat(summary.scoringCombinations()).isEqualTo(expectedCombination)
         assertThat(summary.points()).isEqualTo(3)
     }
@@ -40,7 +40,7 @@ class RunsTest {
                 Card(Suit.CLUBS, Rank.SIX)
             )
         )
-        val summary = Runs().apply(ruleInput(stack))
+        val summary = runs(ruleInput(stack))
         assertThat(summary.scoringCombinations()).isEqualTo(expectedCombination)
         assertThat(summary.points()).isEqualTo(3)
     }
@@ -64,7 +64,7 @@ class RunsTest {
                 Card(Suit.CLUBS, Rank.FIVE)
             )
         )
-        val summary = Runs().apply(ruleInput(stack))
+        val summary = runs(ruleInput(stack))
         assertThat(summary.scoringCombinations()).isEqualTo(expectedCombination)
         assertThat(summary.points()).isEqualTo(5)
     }
@@ -78,7 +78,7 @@ class RunsTest {
                 Card(Suit.DIAMONDS, Rank.TWO)
             )
         )
-        val summary = Runs().apply(ruleInput(stack))
+        val summary = runs(ruleInput(stack))
         assertThat(summary.scoringCombinations()).isEmpty()
         assertThat(summary.points()).isZero
     }
