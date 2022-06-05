@@ -8,7 +8,7 @@ import engine.rule.emptyRuleSummary
 
 typealias Rule = (Card) -> RuleSummary
 
-fun heels(starterCard: Card): RuleSummary {
+internal fun heels(starterCard: Card): RuleSummary {
     if (starterCard.rank() == Rank.JACK) {
         return RuleSummary(RuleType.HEELS, 2, listOf(starterCard))
     }

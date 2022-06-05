@@ -20,15 +20,15 @@ private fun getDesiredCountRule(desiredCount: Int, ruleType: RuleType): Rule {
     return ::isDesiredCount
 }
 
-fun fifteen(ruleInput: RuleInput): RuleSummary {
+internal fun fifteen(ruleInput: RuleInput): RuleSummary {
     return getDesiredCountRule(15, RuleType.FIFTEEN)(ruleInput)
 }
 
-fun thirtyOne(ruleInput: RuleInput): RuleSummary {
+internal fun thirtyOne(ruleInput: RuleInput): RuleSummary {
     return getDesiredCountRule(31, RuleType.THIRTY_ONE)(ruleInput)
 }
 
-fun pairs(ruleInput: RuleInput): RuleSummary {
+internal fun pairs(ruleInput: RuleInput): RuleSummary {
 
     fun choose(n: Int, k: Int): Int {
         if (k == 0) {
@@ -49,7 +49,7 @@ fun pairs(ruleInput: RuleInput): RuleSummary {
     )
 }
 
-fun runs(ruleInput: RuleInput): RuleSummary {
+internal fun runs(ruleInput: RuleInput): RuleSummary {
 
     fun findRun(stack: List<Card>, card: Card, n: Int): List<Card> {
         if (stack.size < n - 1) {

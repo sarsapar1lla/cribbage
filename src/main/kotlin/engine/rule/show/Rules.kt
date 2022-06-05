@@ -8,12 +8,12 @@ import engine.rule.emptyRuleSummary
 
 typealias Rule = (RuleInput) -> RuleSummary
 
-fun fifteens(ruleInput: RuleInput): RuleSummary {
+internal fun fifteens(ruleInput: RuleInput): RuleSummary {
     val fifteens = ruleInput.uniqueCombinations().filter { it.sumOf { c -> c.cardValue() } == 15 }.toSet()
     return RuleSummary(RuleType.FIFTEEN, fifteens.size * 2, fifteens)
 }
 
-fun flushes(ruleInput: RuleInput): RuleSummary {
+internal fun flushes(ruleInput: RuleInput): RuleSummary {
     val ruleType = RuleType.FLUSH
     val uniqueSuits = ruleInput.hand().getCards().map { c -> c.suit() }.distinct()
     if (uniqueSuits.size > 1) {
@@ -33,7 +33,7 @@ fun flushes(ruleInput: RuleInput): RuleSummary {
     return RuleSummary(ruleType, 4, setOf(ruleInput.hand().getCards()))
 }
 
-fun pairs(ruleInput: RuleInput): RuleSummary {
+internal fun pairs(ruleInput: RuleInput): RuleSummary {
     val pairs = mutableSetOf<Set<Card>>()
     val uniquePairs = ruleInput.uniqueCombinations().filter { c -> c.size == 2 }
     for (pair in uniquePairs) {
@@ -45,7 +45,7 @@ fun pairs(ruleInput: RuleInput): RuleSummary {
     return RuleSummary(RuleType.PAIR, pairs.size * 2, pairs)
 }
 
-fun runs(ruleInput: RuleInput): RuleSummary {
+internal fun runs(ruleInput: RuleInput): RuleSummary {
     val ruleType = RuleType.RUN
     val runs = mutableListOf<Set<Card>>()
     val possibleRuns = ruleInput.uniqueCombinations().filter { combination -> combination.size >= 3 }
@@ -75,7 +75,7 @@ fun runs(ruleInput: RuleInput): RuleSummary {
     )
 }
 
-fun nobs(ruleInput: RuleInput): RuleSummary {
+internal fun nobs(ruleInput: RuleInput): RuleSummary {
     val ruleType = RuleType.NOBS
     val starterCardSuit = ruleInput.starterCard().suit()
     val nobsFilter = { c: Card -> c.suit() == starterCardSuit && c.rank() == Rank.JACK}
