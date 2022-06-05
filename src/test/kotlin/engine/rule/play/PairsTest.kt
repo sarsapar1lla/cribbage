@@ -24,7 +24,7 @@ class PairsTest {
                 Card(Suit.CLUBS, Rank.THREE)
             )
         )
-        val summary = Pairs().apply(ruleInput(stack))
+        val summary = pairs(ruleInput(stack))
         assertThat(summary.scoringCombinations()).isEqualTo(expectedCombination)
         assertThat(summary.points()).isEqualTo(6)
     }
@@ -37,7 +37,7 @@ class PairsTest {
                 Card(Suit.CLUBS, Rank.FOUR)
             )
         )
-        val summary = Pairs().apply(ruleInput(stack))
+        val summary = pairs(ruleInput(stack))
         assertThat(summary.scoringCombinations()).isEmpty()
         assertThat(summary.points()).isZero
     }

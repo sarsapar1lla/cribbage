@@ -3,10 +3,10 @@ package engine.round
 import engine.card.Card
 import engine.player.Player
 import engine.rule.play.RuleInput
-import engine.rule.play.RulesEngine
+import engine.rule.play.score
 import engine.ui.UserInterface
 
-class Play(private val rulesEngine: RulesEngine, private val ui: UserInterface) {
+class Play(private val ui: UserInterface) {
 
     private val cardsPlayed = mutableSetOf<Card>()
     private val lastCardPoints = 1
@@ -25,7 +25,7 @@ class Play(private val rulesEngine: RulesEngine, private val ui: UserInterface) 
         ui.displayStack(stack.cardsAsStrings(), stack.count())
         val selectedCard = player.playCard(cardsPlayed, stack.count(), stack.maxCount())
         val ruleInput = RuleInput(stack, selectedCard)
-        val summary = rulesEngine.score(ruleInput)
+        val summary = score(ruleInput)
 
         player.addPoints(summary.score())
         ui.displayPlayPoints(selectedCard.toString(), player.playerName(), summary, player.score())

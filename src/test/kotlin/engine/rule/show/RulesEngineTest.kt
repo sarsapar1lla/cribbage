@@ -22,7 +22,7 @@ internal class RulesEngineTest {
     fun calculatesCorrectScore() {
         val starterCard = Card(Suit.DIAMONDS, Rank.FIVE)
         val ruleInput = RuleInput(hand, starterCard)
-        val summary = RulesEngine().score(ruleInput)
+        val summary = score(ruleInput)
         assertThat(summary.score()).isEqualTo(12)
     }
 

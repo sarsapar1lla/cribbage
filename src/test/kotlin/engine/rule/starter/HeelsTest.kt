@@ -12,7 +12,7 @@ internal class HeelsTest {
     @Test
     fun scoresHeels() {
         val starterCard = Card(Suit.SPADES, Rank.JACK)
-        val summary = Heels().apply(starterCard)
+        val summary = heels(starterCard)
         assertThat(summary.scoringCombinations()).isEqualTo(listOf(listOf(Card(Suit.SPADES, Rank.JACK))))
         assertThat(summary.points()).isEqualTo(2)
     }
@@ -20,7 +20,7 @@ internal class HeelsTest {
     @Test
     fun scoresNotHeels() {
         val starterCard = Card(Suit.SPADES, Rank.QUEEN)
-        val summary = Heels().apply(starterCard)
+        val summary = heels(starterCard)
         assertThat(summary.scoringCombinations()).isEmpty()
         assertThat(summary.points()).isZero
     }

@@ -5,7 +5,6 @@ import engine.card.Card
 import engine.card.Rank
 import engine.card.Suit
 import engine.player.PredictablePlayer
-import engine.rule.show.RulesEngine
 import engine.ui.MockUI
 
 import kotlin.test.Test
@@ -13,10 +12,9 @@ import org.assertj.core.api.Assertions.assertThat
 
 internal class ShowTest {
 
-    private val rulesEngine = RulesEngine()
     private val ui = MockUI()
 
-    private val show = Show(rulesEngine, ui)
+    private val show = Show(ui)
 
     @Test
     fun runsShowCorrectly() {
